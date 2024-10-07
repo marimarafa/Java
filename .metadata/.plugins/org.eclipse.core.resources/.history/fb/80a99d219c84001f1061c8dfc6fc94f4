@@ -1,0 +1,16 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Prima riga");
+		System.out.println("Seconda riga");
+		System.out.println("Terza riga");
+		
+		byte b1 = 10;
+		byte b2;
+		b2 = 100;
+		byte b3, b4, b5;
+	}
+
+}

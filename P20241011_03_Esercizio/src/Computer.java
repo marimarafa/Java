@@ -28,6 +28,13 @@ public class Computer {
 		conta ++;
 	} 
 
+	@Override
+	public String toString() {
+		return "Computer [prezzo=" + prezzo + ", peso=" + peso + ", dimensione=" + dimensione + ", anno_produzione="
+				+ anno_produzione + ", larghezza=" + larghezza + ", altezza=" + altezza + ", profondità=" + profondità
+				+ "]";
+	}
+
 	public double getPrezzo() {
 		return prezzo;
 	}

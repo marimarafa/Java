@@ -18,7 +18,6 @@ public class Esercizio {
 		
 		Computer c1 = new Computer(23.5,35.6,1980,2.3,4.3,4.5);
 		System.out.println(c1.getDimensione());
-		System.out.println(c1.toString());
 		System.out.println(c1.getAnno_produzione());
 		c1.setLarghezza(23.5);
 		System.out.println(c1.getLarghezza());

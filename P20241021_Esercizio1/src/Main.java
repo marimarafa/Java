@@ -35,4 +35,11 @@ public class Main {
     		//System.out.print(res);
     		return res;
     }
+    public static void StampaIntestazioneOChiusura() {
+		System.out.printf("+");
+		for (int i = 0; i < 59; i++) {
+			System.out.printf("-");
+		}
+		System.out.printf("+\n");
+	}
 }

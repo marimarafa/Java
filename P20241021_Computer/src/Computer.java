@@ -32,8 +32,14 @@ public class Computer {
 	}
 	@Override
 	public String toString() {
-		return String.format("Prezzo: %.2f €\nPeso: %.2f kg\nAnno di produzione: %d\nLarghezza: %.2f cm\nAltezza: %.2f cm\nProfondità: %.2f cm\nProduttore: %s", 
-						 prezzo, peso, annoDiProduzione, larghezza, altezza, profondità, produttore);
+		return String.format("Prezzo: %.2f €\nPeso: %.2f kg\nAnno di produzione: %d\nLarghezza: %.2f cm\nAltezza: %.2f cm\nProfondità: %.2f cm\nProduttore: %s.", 
+						 prezzo, peso, annoDiProduzione, larghezza, altezza, profondità,produttore);
+	}
+	public String GetProduttore(){
+	    return produttore;
+	}
+	public void setProduttore(String produttore) {
+		this.produttore = produttore;
 	}
 	static public int GetContatore() {
 		return contatore;
@@ -71,15 +77,10 @@ public class Computer {
 	public void setProfondità(Double profondità) {
 		this.profondità = profondità;
 	}
-	public String getProduttore() {
-		return produttore;
-	}
-	public void setProduttore(String produttore) {
-		this.produttore = produttore;
-	}
 	public void setAnnoDiProduzione(Integer annoDiProduzione) {
 		this.annoDiProduzione = annoDiProduzione;
 	}
 
 
 }
+

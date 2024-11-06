@@ -19,13 +19,12 @@ public class Main {
             
             
             StampaIntestazioneOChiusura();
-            System.out.printf("| %-28s |\n", "Computer numero: " + i);
-            //System.out.printf("| %-28s |\n", "Produttore: " + produttore);
-            System.out.printf("| %-28s |\n", "");
+            System.out.printf("| %30s |\n", "Computer numero: " + i);
+            System.out.printf("| %30s |\n", "");
             
             String[] attributi = com.toString().split("\n");
             for (String attributo : attributi) {
-                System.out.printf("| %-28s |\n", attributo);
+                System.out.printf("| %30s |\n", attributo);
             }
             
             StampaIntestazioneOChiusura();

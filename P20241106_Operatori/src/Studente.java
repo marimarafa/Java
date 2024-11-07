@@ -26,8 +26,7 @@ public class Studente extends Persona {
 
 	@Override
 	public String toString() {
-		return "Studente [corso=" + corso + ", annoDiFrequenza=" + annoDiFrequenza + ", toString()=" + super.toString()
-				+ "]";
+		return super.toString() +",corso = " + corso + ", annoDiFrequenza = " + annoDiFrequenza + ".";
 	}
 	
 	

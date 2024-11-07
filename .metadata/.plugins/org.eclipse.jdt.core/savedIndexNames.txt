@@ -1,14 +1,13 @@
-INDEX VERSION 1.134+/home/user/Projects/Java/.metadata/.plugins/org.eclipse.jdt.core
-2066976982.index
-902666513.index
+INDEX VERSION 1.134+C:\Users\seren\OneDrive\Desktop\Git\Java\.metadata\.plugins\org.eclipse.jdt.core
+955009768.index
+244180693.index
+3736934371.index
+193673743.index
+1763529295.index
+3504948540.index
+1075098866.index
+2691870959.index
+3162473126.index
+2927269404.index
+371445819.index
 1865797976.index
-1213521969.index
-2117422092.index
-2961331150.index
-1977790851.index
-3918758420.index
-1743234361.index
-3502905910.index
-1580451768.index
-1264987594.index
-545235456.index

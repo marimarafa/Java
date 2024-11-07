@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Main
 {
 	public static void main(String[] args) {
-		Studente[] studenti = new Studente[2];
+		Studente[] studenti = new Studente[10];
 		Scanner scanner = new Scanner(System.in);
 		int count = 0;
 		while (true) {

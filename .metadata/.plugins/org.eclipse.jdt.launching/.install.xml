@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dirs>
     <entry loc="/usr/lib/jvm/jdk-21.0.4-oracle-x64" stamp="1728290497761"/>
+    <entry loc="C:\Users\seren\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_23.0.1.v20241024-1700" stamp="1731010241839"/>
+    <entry loc="C:\Users\seren\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_23.0.1.v20241024-1700\jre" stamp="1731010241833"/>
 </dirs>

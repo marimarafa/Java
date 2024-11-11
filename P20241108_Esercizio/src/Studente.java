@@ -35,8 +35,20 @@ public class Studente extends Persona implements Comparable<Studente> {
 
 	@Override
 	public int compareTo(Studente o) {
-		return getNome().compareTo(o.getNome());
-	}
+		if(getNome().compareTo(o.getNome()) != 0) {
+			return getNome().compareTo(o.getNome());
+		}
+		else if(getEta() - o.getEta() != 0 ) {
+			return getEta() - o.getEta();
+		}
+		else if(getCorso().compareTo(o.getCorso())!= 0){
+			return getCorso().compareTo(o.getCorso());
+		}
+		else if(getAnnoDiFrequenza() - o.getAnnoDiFrequenza() != 0 ) {
+			return getAnnoDiFrequenza() - o.getAnnoDiFrequenza();
 	
+		}
+		return 0;
+	}
 	
 }

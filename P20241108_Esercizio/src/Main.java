@@ -2,30 +2,22 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-
 public class Main {
 
 	public static void main(String[] args) {
 		LinkedList<Studente> lstud = new LinkedList<Studente>();
-		lstud.add(new Studente("pippo", 34, "altro", 12));
+		lstud.add(new Studente("pippo", 34, "altro", 32));
+		lstud.add(new Studente("pippo", 44, "altro", 22));
 		lstud.add(new Studente("paperino", 22, "altro", 11));
-		lstud.add(new Studente("pippo", 24, "altro", 12));
-		lstud.add(new Studente("paperino", 11, "altro", 11));
-		
+		lstud.add(new Studente("aaa cercasi", 22, "altra", 19));
+		lstud.add(new Studente("aaa cercasi", 11, "altro", 11));
+					
 		System.out.println("Studenti creati finora: "+ lstud.getFirst().studentiCreati);
 		
-//		System.out.println(lstud);
-//		LinkedList<Integer> li = new LinkedList<Integer>();
-//		li.add(10);		
-//		li.add(20);
-//		li.add(1);
-//		Collections.sort(li); // per ordinare una lista
-//		Collections.reverse(li);
-//		System.out.println(li);
-//		
-//		Collections.sort(lstud);
-//		System.out.println(lstud);
-//		
+	
+		Collections.sort(lstud);
+		System.out.println(lstud);
+		
 		if (false) {	
 			Studente s1 = (Studente)ParseClass.Parse(Studente.class);
 			// or Persona p1 = (Persona)ParseClass.Parse(Persona.class);
@@ -60,5 +52,14 @@ public class Main {
 	//		};
 			
 		}
+//		System.out.println(lstud);
+//		LinkedList<Integer> li = new LinkedList<Integer>();
+//		li.add(10);		
+//		li.add(20);
+//		li.add(1);
+//		Collections.sort(li); // per ordinare una lista
+//		Collections.reverse(li);
+//		System.out.println(li);
+
 	}
 }

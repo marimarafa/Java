@@ -1,0 +1,9 @@
+public class NostraLL<T> {
+	private T data;
+	private NostraLL<T> next;
+	
+	void AddFirst(T info) {
+		
+	}
+	
+}

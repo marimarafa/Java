@@ -1,0 +1,35 @@
+import java.time.LocalTime;
+import java.util.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// Set,Map, Queue , Stack , Arrays, List
+		//var now = System.nanoTime();
+		
+		// calcolare il tempo che ci vuole per inserire un 1000000 di numeri interi sequenziali 
+		// in testa a una linkedList
+		final Integer N = 1000000;
+		long inizio, fine;
+		
+		InsertInLinkedList(N);
+		
+	}
+
+	private static void InsertInLinkedList(Integer n) {
+		LinkedList<Integer> lli = new LinkedList<Integer>();
+		while(n > 0) {
+			lli.add(n--);
+		}
+	}
+			
+	
+	private static void AddInArrayList(Integer n) {
+		ArrayList<Integer> lli = new ArrayList<Integer>();
+		while(n > 0) {
+			lli.add(n--);
+		}
+		
+	}
+		
+}

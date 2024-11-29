@@ -1,0 +1,15 @@
+public class NostraLL<T> {
+	private T data; // il primo elemento della lista usa solo il puntatore
+	private NostraLL<T> next;
+	
+	void AddFirst(T info) {
+		NostraLL<T> l =  new NostraLL<T>();
+		if(next == null) {
+			next = l;
+		} else {
+			l.next = next;
+			next = l;
+		}
+		
+	}	
+}

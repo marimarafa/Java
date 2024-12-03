@@ -13,7 +13,8 @@ public class Esercizio {
 		 * e stampare il loro contenuto
 		 * 
 		 * NB :utilizzare getter, setter e costruttore
-		 * Bonus: aggiungere un metodo alla classe Computer che stampi quanti oggetti sono stati creati */
+		 * Bonus: aggiungere un metodo alla classe Computer che stampi quanti oggetti sono stati creati 
+		 * */
 	
 		
 		Computer c1 = new Computer(23.5,35.6,1980,2.3,4.3,4.5);

@@ -1,10 +1,11 @@
-import java.io.IOException;
-import java.util.LinkedList;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-
+		
+		Locale.setDefault(Locale.US);
 		// Create una lista con 10 elementi Wifi casuali
 		LinkedList<WiFi> lwifi = new LinkedList<WiFi>();
 		for (int i = 0; i < 10; i++) {
@@ -19,7 +20,6 @@ public class Main {
 			String a = String.format("%s,%s,%s,%f\n", 
 					x.getId(), x.getProtocollo(), x.getPassword(), x.getFrequenza());
 			//System.out.print(a);
-			
 			//System.out.printf("%s,%s,%s,%f\n", 
 					//x.getId(), x.getProtocollo(), x.getPassword(), x.getFrequenza());
 		}
@@ -30,5 +30,18 @@ public class Main {
 		}
 		fou.close();
 		
+		lwifi.clear();
+		
+		BufferedReader fin = Util.OpenFileForReading("wifi.dat");
+		String riga = fin.readLine();
+		while (riga != null) {
+//			riga = new StringBuilder(new StringBuilder(riga).reverse().toString().replaceFirst(",", ".")).reverse()
+//                    .toString();
+			String[] items = riga.split(",");
+			WiFi it = new WiFi(items[0], items[1], items[2], Double.parseDouble(items[3]));
+			lwifi.add(it);
+			riga = fin.readLine();
+		}
+		fin.close();		
 	}
 }

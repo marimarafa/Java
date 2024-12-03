@@ -53,6 +53,7 @@ public class Main {
 		jsonString = objectMapper.writeValueAsString(appo);
 		System.out.println(jsonString);
 		
+		
 		// deserialize
 		WiFi nuovo = objectMapper.readValue(jsonString, WiFi.class);
 		System.out.println(nuovo);
@@ -76,5 +77,15 @@ public class Main {
 		}
 		fin.close();
 		System.out.println(lwifi);
+		
+		
+		String listaJson = objectMapper.writeValueAsString(lwifi);
+		System.out.println(listaJson);
+		
+		lwifi.clear();
+		lwifi = objectMapper.readValue(listaJson, lwifi.getClass());
+		System.out.println(lwifi);
+		
+		
 	}
 }

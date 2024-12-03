@@ -26,7 +26,7 @@ public class WiFi {
 	}
 	@Override
 	public String toString() {
-		return "WiFi [id=" + id + ", password=" + password + ", protocollo=" + protocollo + ", frequenza=" + frequenza
+		return "\nWiFi [id=" + id + ", password=" + password + ", protocollo=" + protocollo + ", frequenza=" + frequenza
 				+ "]";
 	}
 	public String getId() {

@@ -1,5 +1,0 @@
-public class NostraLL<T> {
-	T data;
-	NostraLL<T> next;
-	
-}

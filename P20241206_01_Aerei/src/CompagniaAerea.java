@@ -49,7 +49,7 @@ public class CompagniaAerea {
 		try {
 			for(Volo volo:voli) {
 				if(volo.getId() == id) {
-					System.out.println("Orario decollo :" + volo.getDecollo() + "\n Orario atterraggio :" + volo.getAtterraggio() );
+					System.out.println("Orario decollo :" + volo.getDecollo() + "\nOrario atterraggio :" + volo.getAtterraggio() );
 				}
 			}
 		} catch(Exception e){

@@ -94,7 +94,5 @@ public class CompagniaAerea {
 	public void setAerei(LinkedList<Aereo> aerei) {
 		this.aerei = aerei;
 	}
-	
-	
 }
 

@@ -1,4 +1,9 @@
 public class Aereo {
+	@Override
+	public String toString() {
+		return "Aereo [posti_tot=" + posti_tot + ", posti=" + posti + ", id=" + id + "]";
+	}
+
 	private  int posti_tot ;
 	private  int posti;
 	private  int id ;

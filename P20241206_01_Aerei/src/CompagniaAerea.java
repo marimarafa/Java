@@ -10,53 +10,72 @@ public class CompagniaAerea {
 		System.out.println("Aereo aggiunto con successo.");
 	}
 	public void EliminaAereo(int id) {
-		try {
-			for(Volo volo:voli) {
-				if(volo.getId() == id) {
-					aerei.remove(volo.getId());
-					System.out.println("Aereo eliminato con successo.");
-				}
-			}
-		} catch(Exception e) {
-			System.out.println("Aereo non disponibile.");
-		}
+	    boolean id_trovato = false; 
+	    for(Aereo aereo: aerei) {
+	        if(aereo.getId() == id) {
+	            aerei.remove(aereo);    
+	            id_trovato = true; 
+	            break; 
+	        }
+	    }
+	    
+	    if(id_trovato) {
+	        System.out.println("Aereo cancellato con successo.");
+	    } else {
+	        System.out.println("Aereo non disponibile.");
+	    }
 	}
 	public  void PrenotaVolo(int postiDaPrenotare,int id) {
-		try {
-			for(Volo volo:voli) {
-				if(volo.getId() == id) {
-					volo.PrenotaPosto(postiDaPrenotare);
-				}
-			}	
-		}catch(Exception e) {
-				System.out.println("Volo non disponibile.");
+		boolean id_trovato = false;
+		for(Volo volo:voli) {
+			if(volo.getId() == id) {
+				id_trovato = true;
+				volo.PrenotaPosto(postiDaPrenotare);
+				break;
 			}
 		}
-	public void CancellaVolo(int postiDaCancellare, int id) {
-		try {
-			for(Volo volo:voli) {
-				if(volo.getId() == id) {
-					volo.CancellazionePosto(postiDaCancellare);
-				}
-			}
+		if(id_trovato) {
+			System.out.println("Volo trovato.");
+				
+		}else{
+				System.out.println("Volo non disponibile.");
+		}
 			
-		}catch(Exception e) {
-			System.out.println("Volo non disponibile");
-		}
-		
-	}	
-	public void OrariDecolloAtterraggio(int id) {
-		try {
-			for(Volo volo:voli) {
-				if(volo.getId() == id) {
-					System.out.println("Orario decollo :" + volo.getDecollo() + "\nOrario atterraggio :" + volo.getAtterraggio() );
-				}
-			}
-		} catch(Exception e){
-				System.out.println("Volo non disponibile.");
-			}
-		
 	}
+	public void CancellaVolo(int postiDaCancellare, int id) {
+		boolean id_trovato = false;
+		for(Volo volo:voli) {
+			if(volo.getId() == id) {
+				id_trovato = true;
+				volo.CancellazionePosto(postiDaCancellare);
+				break;
+			}
+		}
+		if(id_trovato) {
+			System.out.println("Volo trovato.");
+				
+		}else{
+				System.out.println("Volo non disponibile.");
+		}
+			
+	}
+	public void OrariDecolloAtterraggio(int id) {
+		boolean id_trovato = false;
+		for(Volo volo:voli) {
+			if(volo.getId() == id) {
+				id_trovato = true;
+				System.out.println("Orario decollo :" + volo.getDecollo() + "\nOrario atterraggio :" + volo.getAtterraggio() );
+				break;
+			}
+		}
+		if(id_trovato) {
+			System.out.println("Volo trovato.");
+				
+		}else{
+				System.out.println("Volo non disponibile.");
+		}
+			
+	}	
 	public  String getNome() {
 		return nome;
 	}

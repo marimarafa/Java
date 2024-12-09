@@ -21,7 +21,7 @@ public class Volo {
 	
 	@Override
 	public String toString() {
-		return "Volo [imbarco=" + imbarco + ", decollo=" + decollo + ", atterraggio=" + atterraggio + ", aereo=" + aereo
+		return "Volo [imbarco=" + imbarco + ", decollo=" + decollo + ", atterraggio=" + atterraggio + ", aereo=" + getAereo()
 				+ ", id=" + id + ", partenza=" + partenza + ", arrivo=" + arrivo + "]";
 	}
 	
@@ -68,8 +68,8 @@ public class Volo {
 	public void setAtterraggio(String atterraggio) {
 		this.atterraggio = atterraggio;
 	}
-	public Aereo getAereo() {
-		return aereo;
+	public int getAereo() {
+		return aereo.getId();
 	}
 	public void setAereo(Aereo aereo) {
 		this.aereo = aereo;

@@ -4,140 +4,136 @@ public class Main {
     public static void main(String[] args) {
         CompagniaAerea compagnia = new CompagniaAerea();
         Scanner scan = new Scanner(System.in);
-        
-        // Creazione di alcuni aerei e voli per il test
-        Aereo aereo1 = new Aereo();
-        aereo1.setId(1);
-        aereo1.setPosti_tot(200);
-        aereo1.setPosti(150);
-        compagnia.CreaAereo(aereo1);
-        
-        Aereo aereo2 = new Aereo();
-        aereo2.setId(2);
-        aereo2.setPosti_tot(100);
-        aereo2.setPosti(100);
-        compagnia.CreaAereo(aereo2);
-
-        Volo volo1 = new Volo(false, "08:00", "10:00", aereo1, 101, "Roma", "Milano");
-        Volo volo2 = new Volo(false, "09:00", "11:00", aereo2, 102, "Milano", "Napoli");
-        compagnia.getVoli().add(volo1);
-        compagnia.getVoli().add(volo2);
-        
         while(true) {
-            System.out.println("\n\tMENU GENERALE");
-            System.out.println("1) Menu per agenzia");
-            System.out.println("2) Menu per aeroporto");
-            System.out.println("3) Menu per compagnia aerea");
-            System.out.println("4) Esci");
+            System.out.println("\n\tMENU GENERALE \n1) Menu per agenzia \n2) Menu per aeroporto \n3) Menu per compagnia aerea \n4) Esci");
             int op = scan.nextInt();
             
-            if(op == 1){
-                // MENU AGENZIA
-                System.out.println("\tMENU AGENZIA");
-                System.out.println("1) Prenotazione Volo");
-                System.out.println("2) Cancella Prenotazione");
-                System.out.println("0) Torna al menu principale");
-                int op2 = scan.nextInt();
-                if(op2 == 1) {
-                    // Prenotazione Volo
-                    System.out.print("Inserisci l'ID del volo da prenotare: ");
-                    int idVolo = scan.nextInt();
-                    System.out.print("Quanti posti vuoi prenotare? ");
-                    int posti = scan.nextInt();
-                    compagnia.PrenotaVolo(posti, idVolo);
-                } else if(op2 == 2) {
-                    // Cancella Prenotazione
-                    System.out.print("Inserisci l'ID del volo da cancellare: ");
-                    int idVolo = scan.nextInt();
-                    System.out.print("Quanti posti vuoi cancellare? ");
-                    int posti = scan.nextInt();
-                    compagnia.CancellaVolo(posti, idVolo);
-                } else if(op2 == 0) {
-                    continue;
-                }
-            }
-            else if(op == 2) {
-                // MENU AEROPORTO
-                System.out.println("\tMENU AEROPORTO");
-                System.out.println("1) Orari decollo e atterraggio");
-                System.out.println("0) Torna al menu principale");
-                int op2 = scan.nextInt();
-                if(op2 == 1) {
-                    // Orari decollo e atterraggio
-                    System.out.print("Inserisci l'ID del volo per gli orari: ");
-                    int idVolo = scan.nextInt();
-                    compagnia.OrariDecolloAtterraggio(idVolo);
-                } else if(op2 == 0) {
-                    continue;
-                }
-            }
-            else if(op == 3) {
-                // MENU COMPAGNIA AEREA
-                System.out.println("\tMENU COMPAGNIA AEREA");
-                System.out.println("1) Aggiungi Aereo");
-                System.out.println("2) Elimina Aereo");
-                System.out.println("3) Aggiungi Volo");
-                System.out.println("4) Visualizza Voli");
-                System.out.println("0) Torna al menu principale");
-                int op2 = scan.nextInt();
-                if(op2 == 1) {
-                    // Aggiungi Aereo
-                    Aereo aereo = new Aereo();
-                    System.out.print("Inserisci ID Aereo: ");
-                    aereo.setId(scan.nextInt());
-                    System.out.print("Inserisci numero totale di posti: ");
-                    aereo.setPosti_tot(scan.nextInt());
-                    System.out.print("Inserisci posti disponibili: ");
-                    aereo.setPosti(scan.nextInt());
-                    compagnia.CreaAereo(aereo);
-                } else if(op2 == 2) {
-                    // Elimina Aereo
-                    System.out.print("Inserisci ID dell'Aereo da eliminare: ");
-                    int idAereo = scan.nextInt();
-                    compagnia.EliminaAereo(idAereo);
-                } else if(op2 == 3) {
-                    // Aggiungi Volo
-                    System.out.print("Inserisci ID del volo: ");
-                    int idVolo = scan.nextInt();
-                    System.out.print("Inserisci l'orario di decollo (hh:mm): ");
-                    String decollo = scan.next();
-                    System.out.print("Inserisci l'orario di atterraggio (hh:mm): ");
-                    String atterraggio = scan.next();
-                    System.out.print("Inserisci la città di partenza: ");
-                    String partenza = scan.next();
-                    System.out.print("Inserisci la città di arrivo: ");
-                    String arrivo = scan.next();
-                    System.out.print("Inserisci l'ID dell'Aereo: ");
-                    int idAereo = scan.nextInt();
-                    Aereo aereo = null;
-                    for(Aereo a : compagnia.getAerei()) {
-                        if(a.getId() == idAereo) {
-                            aereo = a;
-                            break;
-                        }
+            switch(op) {
+                case 1:
+                    // MENU AGENZIA
+                    System.out.println("\n\tMENU AGENZIA \n1) Prenotazione Volo \n2) Cancella Prenotazione \n3) Torna al menu principale");
+                    int op2 = scan.nextInt();
+                    
+                    switch(op2) {
+                        case 1:
+                            // Prenotazione Volo
+                            System.out.print("Inserisci l'ID del volo da prenotare: ");
+                            int idVolo = scan.nextInt();
+                            System.out.print("Quanti posti vuoi prenotare? ");
+                            int posti = scan.nextInt();
+                            compagnia.PrenotaVolo(posti, idVolo);
+                            break; 
+
+                        case 2:
+                            // Cancella Prenotazione
+                            System.out.print("Inserisci l'ID del volo da cancellare: ");
+                            int idVolo1 = scan.nextInt();
+                            System.out.print("Quanti posti vuoi cancellare? ");
+                            int posti1 = scan.nextInt();
+                            compagnia.CancellaVolo(posti1, idVolo1);
+                            break; 
+                            
+                        case 3:
+                            break; 
                     }
-                    if(aereo != null) {
-                        Volo volo = new Volo(false, decollo, atterraggio, aereo, idVolo, partenza, arrivo);
-                        compagnia.getVoli().add(volo);
-                        System.out.println("Volo aggiunto con successo.");
-                    } else {
-                        System.out.println("Aereo non trovato.");
+                    break;
+
+                case 2:
+                    // MENU AEROPORTO
+                    System.out.println("\tMENU AEROPORTO \n1) Orari decollo e atterraggio \n2) Torna al menu principale");
+                    int op3 = scan.nextInt();
+                    switch(op3) {
+                        case 1:
+                            // Orari decollo e atterraggio
+                            System.out.print("Inserisci l'ID del volo per gli orari: ");
+                            int idVoloOrario = scan.nextInt();
+                            compagnia.OrariDecolloAtterraggio(idVoloOrario);
+                            break; 
+
+                        case 2:
+                            break; 
                     }
-                } else if(op2 == 4) {
-                    // Visualizza Voli
-                    System.out.println("\nVoli Disponibili:");
-                    for(Volo volo : compagnia.getVoli()) {
-                        System.out.println(volo);
+                    break;
+
+                case 3:
+                    // MENU COMPAGNIA AEREA
+                    System.out.println("\tMENU COMPAGNIA AEREA \n1) Aggiungi Aereo \n2) Elimina Aereo \n3) Aggiungi Volo \n4) Visualizza Voli \n5) Visualizza Aerei \n6) Torna al menu principale");
+                    int op4 = scan.nextInt();
+                    switch(op4) {
+                        case 1:
+                            // Aggiungi Aereo
+                            Aereo aereo = new Aereo();
+                            System.out.print("Inserisci ID Aereo: ");
+                            aereo.setId(scan.nextInt());
+                            System.out.print("Inserisci numero totale di posti: ");
+                            aereo.setPosti_tot(scan.nextInt());
+                            System.out.print("Inserisci posti disponibili: ");
+                            aereo.setPosti(scan.nextInt());
+                            compagnia.CreaAereo(aereo);
+                            break; 
+
+                        case 2:
+                            // Elimina Aereo
+                            System.out.print("Inserisci ID dell'Aereo da eliminare: ");
+                            int idAereo = scan.nextInt();
+                            compagnia.EliminaAereo(idAereo);
+                            break; 
+
+                        case 3:
+                            // Aggiungi Volo
+                            System.out.print("Inserisci ID del volo: ");
+                            int idVoloVolo = scan.nextInt();
+                            System.out.print("Inserisci l'orario di decollo (hh:mm): ");
+                            String decollo = scan.next();
+                            System.out.print("Inserisci l'orario di atterraggio (hh:mm): ");
+                            String atterraggio = scan.next();
+                            System.out.print("Inserisci la città di partenza: ");
+                            String partenza = scan.next();
+                            System.out.print("Inserisci la città di arrivo: ");
+                            String arrivo = scan.next();
+                            System.out.print("Inserisci l'ID dell'Aereo: ");
+                            int idaereo = scan.nextInt();
+                            Aereo aereoTrovato = null;
+                            for(Aereo a : compagnia.getAerei()) {
+                                if(a.getId() == idaereo) {
+                                    aereoTrovato = a;
+                                    break;
+                                }
+                            }
+                            if(aereoTrovato != null) {
+                                Volo volo = new Volo(false, decollo, atterraggio, aereoTrovato, idVoloVolo, partenza, arrivo);
+                                compagnia.getVoli().add(volo);
+                                System.out.println("Volo aggiunto con successo.");
+                            } else {
+                                System.out.println("Aereo non trovato.");
+                            }
+                            break; 
+
+                        case 4:
+                            // Visualizza Voli
+                            System.out.println("\nVoli Disponibili:");
+                            for(Volo volo : compagnia.getVoli()) {
+                                System.out.println(volo);
+                            }
+                            break; 
+
+                        case 5:
+                            // Visualizza Aerei
+                            System.out.println("\nAerei Disponibili:");
+                            for(Aereo aereoo : compagnia.getAerei()) {
+                                System.out.println(aereoo);
+                            }
+                            break; 
+
+                        case 6:
+                            break; 
                     }
-                } else if(op2 == 0) {
-                    continue;
-                }
-            }
-            else if(op == 4) {
-                System.out.println("Uscita dal programma.");
-                break;
+                    break;
+
+                case 4:
+                    System.out.println("Uscita dal programma.");
+                    scan.close();
             }
         }
-        scan.close();
     }
 }

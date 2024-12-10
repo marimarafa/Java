@@ -82,7 +82,7 @@ public class Main {
                         case 3:
                             // Aggiungi Volo
                             System.out.print("Inserisci ID del volo: ");
-                            int idVoloVolo = scan.nextInt();
+                            int idVolo = scan.nextInt();
                             System.out.print("Inserisci l'orario di decollo (hh:mm): ");
                             String decollo = scan.next();
                             System.out.print("Inserisci l'orario di atterraggio (hh:mm): ");
@@ -93,20 +93,8 @@ public class Main {
                             String arrivo = scan.next();
                             System.out.print("Inserisci l'ID dell'Aereo: ");
                             int idaereo = scan.nextInt();
-                            Aereo aereoTrovato = null;
-                            for(Aereo a : compagnia.getAerei()) {
-                                if(a.getId() == idaereo) {
-                                    aereoTrovato = a;
-                                    break;
-                                }
-                            }
-                            if(aereoTrovato != null) {
-                                Volo volo = new Volo(false, decollo, atterraggio, aereoTrovato, idVoloVolo, partenza, arrivo);
-                                compagnia.getVoli().add(volo);
-                                System.out.println("Volo aggiunto con successo.");
-                            } else {
-                                System.out.println("Aereo non trovato.");
-                            }
+                            Volo v = new Volo(false, decollo, atterraggio, idVolo, aereo.getId(), partenza, arrivo);
+                            compagnia.AggiungiVolo(v);
                             break; 
 
                         case 4:

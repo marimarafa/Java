@@ -6,9 +6,21 @@ public class CompagniaAerea {
 	private LinkedList<Aereo> aerei = new  LinkedList<Aereo>();
 	
 	public void CreaAereo(Aereo a) {
-		aerei.add(a);
-		System.out.println("Aereo aggiunto con successo.");
-	}
+		 boolean id_trovato = false; 
+		    for(Aereo aereo: aerei) {
+		        if(aereo != a) {
+		        	aerei.add(a);    
+		            id_trovato = true; 
+		            break; 
+		        }
+		    }
+		    
+		    if(id_trovato) {
+		    	System.out.println("Aereo aggiunto con successo.");
+		    } else {
+		        System.out.println("Aereo già esistente.");
+		    }
+		}
 	public void EliminaAereo(int id) {
 	    boolean id_trovato = false; 
 	    for(Aereo aereo: aerei) {
@@ -73,6 +85,23 @@ public class CompagniaAerea {
 				
 		}else{
 				System.out.println("Volo non disponibile.");
+		}
+			
+	}	
+	public void AggiungiVolo(Volo volo) {
+		boolean id_trovato = false;
+		for(Volo v :voli) {
+			if(v.getId() == volo.getId()) {
+				voli.add(volo);
+				id_trovato = true;
+				break;
+			}
+		}
+		if(id_trovato) {
+			System.out.println("Volo aggiunto con successo.");
+				
+		}else{
+				System.out.println("Volo già esistente.");
 		}
 			
 	}	

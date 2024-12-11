@@ -5,23 +5,41 @@ public class CompagniaAerea {
 	private LinkedList<Volo> voli = new  LinkedList<Volo>();
 	private LinkedList<Aereo> aerei = new  LinkedList<Aereo>();
 	
-	public void CreaAereo(Aereo a) {
-		 boolean id_trovato = false; 
-		    for(Aereo aereo: aerei) {
-		        if(aereo != a) {
-		        	aerei.add(a);    
-		            id_trovato = true; 
-		            break; 
-		        }
-		    }
-		    
-		    if(id_trovato) {
-		    	System.out.println("Aereo aggiunto con successo.");
-		    } else {
-		        System.out.println("Aereo già esistente.");
-		    }
-		}
-	public void EliminaAereo(int id) {
+	Scanner scan = new Scanner(System.in);
+	
+	public CompagniaAerea(String nome) {
+		super();
+		this.nome = nome;
+	}
+
+	public void CreaAereo() {
+		Aereo aereo = new Aereo();
+		System.out.print("Inserisci ID Aereo: ");
+		aereo.setId(scan.nextInt());
+		System.out.print("Inserisci numero totale di posti: ");
+		aereo.setPosti_tot(scan.nextInt());
+		System.out.print("Inserisci posti disponibili: ");
+		aereo.setPosti(scan.nextInt());
+	    boolean id_trovato = false; 
+	    for (Aereo a : aerei) {
+	        if (aereo.getId() == a.getId()) { 
+	            id_trovato = true;
+	            break;
+	            
+	        }
+	    }
+
+	    if (!id_trovato) {
+	        aerei.add(aereo); 
+	        System.out.println("Aereo aggiunto con successo.");
+	    } else {
+	        System.out.println("Aereo già esistente.");
+	    }
+	}
+
+	public void EliminaAereo() {
+		System.out.print("Inserisci ID dell'Aereo da eliminare: ");
+		int id = scan.nextInt();
 	    boolean id_trovato = false; 
 	    for(Aereo aereo: aerei) {
 	        if(aereo.getId() == id) {
@@ -37,7 +55,12 @@ public class CompagniaAerea {
 	        System.out.println("Aereo non disponibile.");
 	    }
 	}
-	public  void PrenotaVolo(int postiDaPrenotare,int id) {
+	public  void PrenotaVolo() {
+		System.out.print("Inserisci l'ID del volo da prenotare: ");
+		int id = scan.nextInt();
+		System.out.print("Quanti posti vuoi prenotare? ");
+		int postiDaPrenotare = scan.nextInt();
+		
 		boolean id_trovato = false;
 		for(Volo volo:voli) {
 			if(volo.getId() == id) {
@@ -54,7 +77,11 @@ public class CompagniaAerea {
 		}
 			
 	}
-	public void CancellaVolo(int postiDaCancellare, int id) {
+	public void CancellaVolo() {
+		System.out.print("Inserisci l'ID del volo da cancellare: ");
+		int id = scan.nextInt();
+		System.out.print("Quanti posti vuoi cancellare? ");
+		int postiDaCancellare = scan.nextInt();
 		boolean id_trovato = false;
 		for(Volo volo:voli) {
 			if(volo.getId() == id) {
@@ -71,7 +98,9 @@ public class CompagniaAerea {
 		}
 			
 	}
-	public void OrariDecolloAtterraggio(int id) {
+	public void OrariDecolloAtterraggio() {
+		System.out.print("Inserisci l'ID del volo per gli orari: ");
+		int id = scan.nextInt();
 		boolean id_trovato = false;
 		for(Volo volo:voli) {
 			if(volo.getId() == id) {
@@ -88,23 +117,37 @@ public class CompagniaAerea {
 		}
 			
 	}	
-	public void AggiungiVolo(Volo volo) {
-		boolean id_trovato = false;
-		for(Volo v :voli) {
-			if(v.getId() == volo.getId()) {
-				voli.add(volo);
-				id_trovato = true;
-				break;
-			}
-		}
-		if(id_trovato) {
-			System.out.println("Volo aggiunto con successo.");
-				
-		}else{
-				System.out.println("Volo già esistente.");
-		}
-			
-	}	
+	public void AggiungiVolo() {
+		System.out.print("Inserisci ID del volo: ");
+		int idVolo = scan.nextInt();
+		System.out.print("Inserisci l'orario di decollo (hh:mm): ");
+		String decollo = scan.next();
+		System.out.print("Inserisci l'orario di atterraggio (hh:mm): ");
+		String atterraggio = scan.next();
+		System.out.print("Inserisci la città di partenza: ");
+		String partenza = scan.next();
+		System.out.print("Inserisci la città di arrivo: ");
+		String arrivo = scan.next();
+		System.out.print("Inserisci l'ID dell'Aereo: ");
+		int idaereo = scan.nextInt();
+		
+		Aereo aereoTrovato = null;
+        for (Aereo a : aerei) {
+            if (a.getId() == idaereo) {
+                aereoTrovato = a;
+                break;
+            }
+        }
+       
+        if (aereoTrovato != null) {
+            Volo v = new Volo(false, decollo, atterraggio, aereoTrovato, idVolo, partenza, arrivo);
+           voli.add(v);
+            System.out.println("Volo aggiunto con successo");
+        } else {
+            System.out.println("Aereo con ID " + idaereo + " non trovato.");
+        }
+
+	}
 	public  String getNome() {
 		return nome;
 	}

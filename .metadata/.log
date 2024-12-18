@@ -3268,3 +3268,29 @@ org.eclipse.core.runtime.CoreException: Cannot determine URI for '/P20241213_01_
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1454)
 !SUBENTRY 2 org.eclipse.core.filebuffers 4 0 2024-12-13 13:37:38.210
 !MESSAGE Cannot determine URI for '/P20241213_01_Filatrice/src/Produzione.java'.
+!SESSION 2024-12-18 14:45:31.558 -----------------------------------------------
+eclipse.buildId=4.33.0.20240905-0613
+java.version=23.0.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2024-12-18 14:45:34.196
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-12-18 14:45:44.764
+!MESSAGE Logback config file: /home/user/Projects/Java/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.1.20240411-1122.xml
+!SESSION 2024-12-18 16:17:51.988 -----------------------------------------------
+eclipse.buildId=4.33.0.20240905-0613
+java.version=23.0.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2024-12-18 16:17:55.564
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-12-18 16:18:02.052
+!MESSAGE Logback config file: /home/user/Projects/Java/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.1.20240411-1122.xml

@@ -1,16 +1,20 @@
-
 public class Thread7 extends Thread{
-	public static  Thread.State NEW;
-	public static  Thread.State RUNNABLE;
-	public static  Thread.State TERMINATED;
 	
 	public void run() {
-		if(this.getState() == NEW) {
-			System.out.println(this.getState());
-			
-		}
-			
-		}
+		System.out.println(this.getState());
 	}
+	
+	public static void main(String[] args) throws InterruptedException {
+		Thread7 t7 = new Thread7();
+		
+		
+		System.out.println(t7.getState());
+		t7.start();
+		t7.sleep(500);
+		System.out.println(t7.getState());
+		
+	}
+
+}
 
 

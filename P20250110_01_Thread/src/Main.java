@@ -32,9 +32,8 @@ public class Main {
 //		Thread6 t6_2 = new Thread6();
 //		t6_2.start();
 //		t6_2.setName("Thread 2");
-//		
 		
-		
+
 	}
 
 }

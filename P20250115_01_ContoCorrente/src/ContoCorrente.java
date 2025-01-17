@@ -44,7 +44,7 @@ public class ContoCorrente {
 			double nuovoSaldo = getSaldo() - somma;
 
 			if (nuovoSaldo > 0) {
-				fw = new FileWriter(new File(".").getCanonicalPath() + File.separator + "db.txt");
+				fw = new FileWriter(new File(".").getCanonicalPath() + File.separator + "db2.txt");
 				bw = new BufferedWriter(fw);
 				bw.write(nuovoSaldo + "");
 			} else

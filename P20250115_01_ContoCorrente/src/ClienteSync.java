@@ -1,7 +1,7 @@
 public class ClienteSync extends Thread {
 	private String nome;
 	private double somma;
-	ContoCorrente conto = new ContoCorrente(40000);
+	ContoCorrente conto = new ContoCorrente(100);
 
 	  public void run() {
 	        System.out.println(nome + " sta verificando il saldo: " + conto.getSaldo());

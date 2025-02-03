@@ -6,6 +6,6 @@ class SommaTest {
 
 	@Test
 	void testSomma() {
-		assertEquals(2, Calcolatrice.Somma(1, 1) );
+		assertEquals(2, Somma.somma(1, 1) );
 	}
 }

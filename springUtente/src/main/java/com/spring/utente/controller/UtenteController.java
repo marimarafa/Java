@@ -1,7 +1,6 @@
 package com.spring.utente.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;

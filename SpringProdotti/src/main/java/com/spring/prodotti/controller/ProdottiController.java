@@ -13,11 +13,10 @@ import com.spring.prodotti.dto.ProdottiNoIdDTO;
 import com.spring.prodotti.dto.ReportDTO;
 import com.spring.prodotti.service.ProdottiService;
 
+@RestController
+@RequestMapping(path = "/prodotti")
 public class ProdottiController {
 
-	@RestController
-	@RequestMapping(path = "prodotti")
-	public class UtenteController {
 		private ProdottiService service = new ProdottiService();
 
 		@GetMapping(path = "/caricaProdotto", consumes = "application/json")
@@ -35,12 +34,11 @@ public class ProdottiController {
 			return service.visualizzaProdotti();
 
 		}
-
+		
 		@GetMapping(path = "/visualizzaReport", produces = "application/json")
-		public ReportDTO VisualizzaReport(@PathVariable int id) {
+		public ReportDTO VisualizzaReport() {
 			return service.VisualizzaReport();
-
 		}
 
 	}
-}
+ 

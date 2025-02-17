@@ -49,6 +49,13 @@ public class ProdottiService {
 		double prezzoTotale = 0.0;
 
 		for (Prodotti prodotto : prodotti) {
+			if(idProdottiPerCategoria.containsKey(prodotto.getCategoria())) {
+				idProdottiPerCategoria.get(prodotto.getCategoria()).add(prodotto.getId());
+			} else {
+				
+				idProdottiPerCategoria.put(prodotto.getCategoria(),new ArrayList<Integer>()  );
+				idProdottiPerCategoria.get(prodotto.getCategoria()).add(prodotto.getId());
+			}
 			descrizioneProdotti.add(prodotto.getDescrizione());
 			totalePezzi += prodotto.getQuantita();
 			prezzoTotale += prodotto.getPrezzoMassimo();

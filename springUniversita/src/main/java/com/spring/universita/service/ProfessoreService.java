@@ -1,6 +1,7 @@
 package com.spring.universita.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.spring.universita.dao.DAOProfessore;
@@ -8,11 +9,10 @@ import com.spring.universita.dto.ProfessoreDTO;
 import com.spring.universita.entity.Professore;
 import com.spring.universita.utility.ConversioniProfessore;
 
-
 public class ProfessoreService {
-	
+
 	private DAOProfessore dao = new DAOProfessore();
-	
+
 	public boolean inserisciProfessore(ProfessoreDTO dto) {
 		Professore prof = ConversioniProfessore.daProfessoreDTOAProfessore(dto);
 		return dao.insert(prof);
@@ -37,7 +37,7 @@ public class ProfessoreService {
 		}
 		return professoriDTO;
 	}
-	
+
 	public ProfessoreDTO elimina(int id) {
 		Professore prof = dao.selectById(id);
 		dao.delete(id);
@@ -45,22 +45,43 @@ public class ProfessoreService {
 		return dto;
 
 	}
-	
+
 	public ProfessoreDTO modificaMateria(int id, String materia) {
 		Professore prof = dao.selectById(id);
 		prof.setMateria_insegnamento(materia);
 		ProfessoreDTO dto = ConversioniProfessore.daProfessoreAProfessoreDTO(prof);
 		return dto;
 	}
-	
-	public List<ProfessoreDTO> ProfessoriDiMateria(String materia){
+
+	public List<ProfessoreDTO> ProfessoriDiMateria(String materia) {
 		ArrayList<ProfessoreDTO> professoriDTO = new ArrayList<ProfessoreDTO>();
 		ArrayList<Professore> professori = new ArrayList<Professore>(dao.selectAll());
-		for(Professore prof :professori) {
-			if(prof.getMateria_insegnamento() == materia) {
+		for (Professore prof : professori) {
+			if (prof.getMateria_insegnamento().equals(materia)) {
 				ProfessoreDTO dto = ConversioniProfessore.daProfessoreAProfessoreDTO(prof);
 				professoriDTO.add(dto);
 			}
-		} return professoriDTO;
+		}
+		return professoriDTO;
+	}
+
+	public List<ProfessoreDTO> OrdinaPerCognome() {
+		ArrayList<ProfessoreDTO> professoriDTO = new ArrayList<ProfessoreDTO>();
+		ArrayList<Professore> professori = new ArrayList<Professore>(dao.selectAll());
+		for (Professore prof : professori) {
+			ProfessoreDTO dto = ConversioniProfessore.daProfessoreAProfessoreDTO(prof);
+			professoriDTO.add(dto);
+		}
+		Collections.sort(professoriDTO);
+		return professoriDTO;
+	}
+
+	public List<String> ListaMaterie(){
+		ArrayList<String> materie = new ArrayList<String>();
+		ArrayList<Professore> professori = new ArrayList<Professore>(dao.selectAll());
+		for (Professore prof : professori) {
+			materie.add(prof.getMateria_insegnamento());
+		}
+		return materie;
 	}
 }

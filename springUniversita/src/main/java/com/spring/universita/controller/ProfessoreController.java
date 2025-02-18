@@ -43,9 +43,18 @@ public class ProfessoreController {
 		return service.modificaMateria(id, materia);
 	}
 	
-	@GetMapping(path = "/professoriDiMateria", produces = "application/json")
-	public List<ProfessoreDTO> Modifica(@PathVariable String materia) {
+	@GetMapping(path = "/professoriDiMateria/{materia}", produces = "application/json")
+	public List<ProfessoreDTO> professoriDiMateria(@PathVariable String materia) {
 		return service.ProfessoriDiMateria( materia);
 	}
-
+	
+	@GetMapping(path = "/ordinaPerCognome", produces = "application/json")
+	public List<ProfessoreDTO> OrdinaPerCognome() {
+		return service.OrdinaPerCognome();
+	}
+	
+	@GetMapping(path = "/materie", produces = "application/json")
+	public List<String> ListaMaterie() {
+		return service.ListaMaterie();
+	}
 }

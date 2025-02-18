@@ -1,6 +1,8 @@
 package com.spring.universita.dto;
 
-public class ProfessoreDTO {
+import com.spring.universita.entity.Professore;
+
+public class ProfessoreDTO implements Comparable<ProfessoreDTO> {
 	private int id;
 	private String nome;
 	private String cognome;
@@ -55,5 +57,9 @@ public class ProfessoreDTO {
 		return "Professore [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", materia_insegnamento="
 				+ materia_insegnamento + "]";
 	}
-
+	@Override
+	public int compareTo(ProfessoreDTO o) {
+		return this.getCognome().compareTo(o.getCognome());
+	}
+	
 }

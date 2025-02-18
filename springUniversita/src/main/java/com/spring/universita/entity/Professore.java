@@ -1,6 +1,6 @@
 package com.spring.universita.entity;
 
-public class Professore {
+public class Professore{
 	private int id;
 	private String nome;
 	private String cognome;
@@ -46,6 +46,7 @@ public class Professore {
 		return "Professore [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", materia_insegnamento="
 				+ materia_insegnamento + "]";
 	}
+	
 	
 	
 

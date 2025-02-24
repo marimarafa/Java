@@ -2,6 +2,7 @@ package com.spring.utente.controller;
 
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,22 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.utente.dto.NomeCognomeDTO;
 import com.spring.utente.dto.UtenteDto;
-import com.spring.utente.entity.Utente;
 import com.spring.utente.service.UtenteService;
 
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping(path= "utenti")
 public class UtenteController {
-	private UtenteService service = new UtenteService();
+	
+	@Autowired
+	private UtenteService service;
 	
 	@GetMapping(path= "/registra", consumes = "application/json")
 	public boolean registra(@RequestBody UtenteDto dto) {
 		return service.registra(dto);
 	}
-	
-	
 	
 	@GetMapping(path = "/cerca/{id}", produces = "application/json")
 	public UtenteDto cercaPerId(@PathVariable int id) {

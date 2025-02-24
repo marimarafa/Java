@@ -2,9 +2,11 @@ package com.spring.utente.dao;
 
 import java.util.*;
 
-import com.spring.utente.entity.Utente;
+import org.springframework.stereotype.Repository;
 
-public class DAOUtenteMappa {
+import com.spring.utente.entity.Utente;
+@Repository
+public class DAOUtenteMappaImpl implements DAOUtente {
 
 	private Map<Integer, Utente> mappa = new HashMap<>();
 

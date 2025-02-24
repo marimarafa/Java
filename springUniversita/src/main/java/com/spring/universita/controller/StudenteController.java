@@ -2,6 +2,7 @@ package com.spring.universita.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,8 @@ import com.spring.universita.service.StudenteService;
 @RestController
 @RequestMapping(path = "/studente")
 public class StudenteController {
-	private StudenteService service = new StudenteService();
+	@Autowired
+	private StudenteService service;
 
 	@GetMapping(path = "/inserisci", consumes = "application/json")
 	public boolean InserisciStudente(@RequestBody StudenteDTO dto) {

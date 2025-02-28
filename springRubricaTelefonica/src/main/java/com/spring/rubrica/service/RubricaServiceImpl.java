@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.rubrica.dao.DAORubrica;
+import com.spring.rubrica.dto.NumeroContattiDiRubricaDTO;
 import com.spring.rubrica.dto.RubricaDTO;
-import com.spring.rubrica.dto.RubricaListaPropietariDTO;
-import com.spring.rubrica.dto.RubricaPropietario_AnnoCreazioneDTO;
+import com.spring.rubrica.dto.RubricaListaProprietariDTO;
+import com.spring.rubrica.dto.RubricaProprietario_AnnoCreazioneDTO;
 import com.spring.rubrica.entity.Rubrica;
 import com.spring.rubrica.utility.Conversioni;
 
@@ -51,19 +52,19 @@ public class RubricaServiceImpl implements RubricaService {
 		return dto;
 	}
 
-	public RubricaPropietario_AnnoCreazioneDTO visualizzaRubrica(int id) {
+	public RubricaProprietario_AnnoCreazioneDTO visualizzaRubrica(int id) {
 		Rubrica rubrica = dao.selectById(id);
 		if (rubrica != null) {
 			RubricaDTO dto = Conversioni.daRubricaARubricaDTO(rubrica);
-			return new RubricaPropietario_AnnoCreazioneDTO(dto.getPropietario(), dto.getAnno_creazione());
+			return new RubricaProprietario_AnnoCreazioneDTO(dto.getProprietario(), dto.getAnno_creazione());
 		}
 		return null;
 	}
 
-	public RubricaDTO ModificaPropietario(int id, String nuovoPropietario) {
+	public RubricaDTO ModificaProprietario(int id, String nuovoPropietario) {
 		Rubrica rubrica = dao.selectById(id);
 		RubricaDTO dto = Conversioni.daRubricaARubricaDTO(rubrica);
-		dto.setPropietario(nuovoPropietario);
+		dto.setProprietario(nuovoPropietario);
 		return dto;
 	}
 
@@ -75,19 +76,19 @@ public class RubricaServiceImpl implements RubricaService {
 		return dto;
 	}
 
-	public RubricaListaPropietariDTO VisualizzaPropietari() {
+	public RubricaListaProprietariDTO VisualizzaProprietari() {
 		ArrayList<String> propietariDTO = new ArrayList<String>();
 		ArrayList<Rubrica> rubriche = new ArrayList<Rubrica>(dao.selectAll());
 		int numero_totale = 0;
 		for (Rubrica rubrica : rubriche) {
 			RubricaDTO dto = Conversioni.daRubricaARubricaDTO(rubrica);
-			propietariDTO.add(dto.getPropietario());
+			propietariDTO.add(dto.getProprietario());
 			numero_totale++;
 		}
-		return new RubricaListaPropietariDTO(propietariDTO, numero_totale);
+		return new RubricaListaProprietariDTO(propietariDTO, numero_totale);
 	}
 
-	public RubricaPropietario_AnnoCreazioneDTO RubricaPiuVecchia() {
+	public RubricaProprietario_AnnoCreazioneDTO RubricaPiuVecchia() {
 		ArrayList<Rubrica> rubriche = new ArrayList<>(dao.selectAll());
 		ArrayList<Integer> anni_creazioni = new ArrayList<Integer>();
 
@@ -95,7 +96,7 @@ public class RubricaServiceImpl implements RubricaService {
 			anni_creazioni.add(rubrica.getAnno_creazione());
 			int max = Collections.max(anni_creazioni);
 
-			return new RubricaPropietario_AnnoCreazioneDTO(rubrica.getPropietario(), max);
+			return new RubricaProprietario_AnnoCreazioneDTO(rubrica.getProprietario(), max);
 		}
 		return null;
 
@@ -111,5 +112,11 @@ public class RubricaServiceImpl implements RubricaService {
 		return  annicreazione;
 	}
 	
-
+	public NumeroContattiDiRubricaDTO NumeroContattiInRubrica(int id) {
+		Rubrica rubrica = dao.selectById(id);
+		RubricaDTO dto = Conversioni.daRubricaARubricaDTO(rubrica);
+		return new NumeroContattiDiRubricaDTO(dto.getProprietario(),dto.getContatti().size());
+	}
+	
+	
 }

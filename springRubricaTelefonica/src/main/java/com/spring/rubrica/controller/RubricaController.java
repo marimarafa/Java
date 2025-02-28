@@ -1,5 +1,6 @@
 package com.spring.rubrica.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.rubrica.dto.ContattoDTO;
+import com.spring.rubrica.dto.ContattoNoIdDTO;
+import com.spring.rubrica.dto.NumeroContattiDiRubricaDTO;
 import com.spring.rubrica.dto.RubricaDTO;
-import com.spring.rubrica.dto.RubricaListaPropietariDTO;
-import com.spring.rubrica.dto.RubricaPropietario_AnnoCreazioneDTO;
+import com.spring.rubrica.dto.RubricaListaProprietariDTO;
+import com.spring.rubrica.dto.RubricaProprietario_AnnoCreazioneDTO;
+import com.spring.rubrica.service.ContattoService;
 import com.spring.rubrica.service.RubricaService;
 
 @RestController
@@ -20,6 +25,9 @@ public class RubricaController {
 	
 	@Autowired
 	RubricaService service;
+	
+	@Autowired
+	ContattoService service2;
 	
 
 	@GetMapping(path ="/inserisci",consumes = "application/json")
@@ -44,13 +52,13 @@ public class RubricaController {
 	}
 	
 	@GetMapping(path ="/visualizza/{id}" , produces = "application/json")
-	public RubricaPropietario_AnnoCreazioneDTO visualizzaRubrica(@PathVariable int id) {
+	public RubricaProprietario_AnnoCreazioneDTO visualizzaRubrica(@PathVariable int id) {
 		return service.visualizzaRubrica(id);
 	}
 	
-	@GetMapping(path ="/modificaPropietario/{id}" , produces = "application/json")
+	@GetMapping(path ="/modificaProprietario/{id}" , produces = "application/json")
 	public RubricaDTO modificaPropietario(@PathVariable int id, String propietario) {
-		return service.ModificaPropietario(id, propietario);
+		return service.ModificaProprietario(id, propietario);
 		
 	}
 	
@@ -60,13 +68,13 @@ public class RubricaController {
 	
 	}
 	
-	@GetMapping(path ="/propietari" , produces = "application/json")
-	public RubricaListaPropietariDTO visualizzaPropietari() {
-		return service.VisualizzaPropietari();
+	@GetMapping(path ="/proprietari" , produces = "application/json")
+	public RubricaListaProprietariDTO visualizzaProprietari() {
+		return service.VisualizzaProprietari();
 	}
 	
 	@GetMapping(path ="/rubricaVecchia" , produces = "application/json")
-	public RubricaPropietario_AnnoCreazioneDTO RubricaPiuVecchia() {
+	public RubricaProprietario_AnnoCreazioneDTO RubricaPiuVecchia() {
 		return service.RubricaPiuVecchia();
 		
 	}
@@ -76,9 +84,70 @@ public class RubricaController {
 		return service.ListaAnniCreazione();
 		
 	}
-
+	
+	@GetMapping(path ="/numeroContatti/{id}" , produces = "application/json")
+	public NumeroContattiDiRubricaDTO  NumeroContattiRubrica(@PathVariable int id) {
+		return service.NumeroContattiInRubrica(id);
+		
+	}
+	
+	@GetMapping(path ="/aggiungiContatto/{idRubrica}" , consumes = "application/json")
+	public boolean  AggiungiContatto(@PathVariable int idRubrica, @RequestBody ContattoDTO dto) {
+		return service2.inserisciContatto(idRubrica, dto);
+		
+	}
+	
+	@GetMapping(path ="/visualizzaContatto/{idRubrica}/{id}" , produces = "application/json")
+	public ContattoDTO  VisualizzaContatto(@PathVariable Integer idRubrica, @PathVariable Integer id ) {
+		return service2.visualizzaContatto(idRubrica, id);
+		
+	}
+	
+	@GetMapping(path ="/modificaContatto/{idRubrica}/{id}" , produces = "application/json")
+	public ContattoDTO  ModificaContatto(@PathVariable int idRubrica, @PathVariable Integer id,@RequestBody ContattoNoIdDTO dto) {
+		return service2.modifica(idRubrica, id , dto);
+		
+	}
+	
+	@GetMapping(path ="/cancellaContatto/{idRubrica}/{id}" , produces = "application/json")
+	public ContattoDTO  CancellaContatto(@PathVariable Integer idRubrica,@PathVariable Integer id) {
+		return service2.cancella(idRubrica, id);
+		
+	} 
+	
+	@GetMapping(path ="/listaContatti/{idRubrica}" , produces = "application/json")
+	public List<ContattoDTO>  ListaContatti(@PathVariable Integer idRubrica) {
+		return service2.listaContatti(idRubrica);
+		
+	}
 	
 
+	@GetMapping(path ="/numeroContattiRegistrati/{idRubrica}" , produces = "application/json")
+	public Integer  NumeroContatti(@PathVariable Integer idRubrica) {
+		return service2.NumeroContatti(idRubrica);
+		
+	}
+	
+
+	@GetMapping(path ="/visualizzaConNumero/{idRubrica}/{numero}" , produces = "application/json")
+	public ContattoDTO  NumeroContatti(@PathVariable Integer idRubrica, @PathVariable Integer numero) {
+		return service2.VisualizzaConNumero(idRubrica, numero);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 	
 	
 	

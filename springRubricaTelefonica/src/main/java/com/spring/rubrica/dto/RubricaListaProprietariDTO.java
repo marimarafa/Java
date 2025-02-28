@@ -2,26 +2,26 @@ package com.spring.rubrica.dto;
 
 import java.util.List;
 
-public class RubricaListaPropietariDTO {
-	private List<String> propietari;
+public class RubricaListaProprietariDTO {
+	private List<String> proprietari;
 	private int numeroTotale;
 	
-	public RubricaListaPropietariDTO(List<String> propietari, int numeroTotale) {
+	public RubricaListaProprietariDTO(List<String> proprietari, int numeroTotale) {
 		super();
-		this.propietari = propietari;
+		this.proprietari = proprietari;
 		this.numeroTotale = numeroTotale;
 	}
 
-	public RubricaListaPropietariDTO() {
+	public RubricaListaProprietariDTO() {
 		super();
 	}
 
-	public List<String> getPropietari() {
-		return propietari;
+	public List<String> getProprietari() {
+		return proprietari;
 	}
 
-	public void setPropietari(List<String> propietari) {
-		this.propietari = propietari;
+	public void setProprietari(List<String> proprietari) {
+		this.proprietari = proprietari;
 	}
 
 	public int getNumeroTotale() {

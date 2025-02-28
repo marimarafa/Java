@@ -2,8 +2,7 @@ package com.spring.rubrica.dto;
 
 import java.sql.Date;
 
-public class ContattoDTO {
-	private int id;
+public class ContattoNoIdDTO {
 	private String nome;
 	private String cognome;
 	private int numero;
@@ -15,26 +14,18 @@ public class ContattoDTO {
 	public String getNome() {
 		return nome;
 	}
-	public ContattoDTO() {
+	public ContattoNoIdDTO() {
 		super();
 	}
-	public ContattoDTO(int id ,String nome, String cognome, int numero, String gruppo_appartenenza, Date data_nascita,
+	public ContattoNoIdDTO(String nome, String cognome, int numero, String gruppo_appartenenza, Date data_nascita,
 			boolean preferito) {
 		super();
-		this.id = id ;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.numero = numero;
 		this.gruppo_appartenenza = gruppo_appartenenza;
 		this.data_nascita = data_nascita;
 		this.preferito = preferito;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -70,6 +61,4 @@ public class ContattoDTO {
 		this.preferito = preferito;
 	}
 	
-	
-
 }

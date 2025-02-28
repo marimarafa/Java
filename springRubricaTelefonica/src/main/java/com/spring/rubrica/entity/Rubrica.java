@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Rubrica {
 	private int id;
-	private String propietario;
+	private String proprietario;
 	private int anno_creazione;
 	private Map<Integer, Contatto> contatti = new HashMap<>();
 	
@@ -13,10 +13,10 @@ public class Rubrica {
 		super();
 	}
 	
-	public Rubrica(int id,String propietario, int anno_iscrizione) {
+	public Rubrica(int id,String proprietario, int anno_iscrizione) {
 		super();
 		this.id = id;
-		this.propietario = propietario;
+		this.proprietario = proprietario;
 		this.anno_creazione = anno_iscrizione;
 	}
 	
@@ -37,11 +37,11 @@ public class Rubrica {
 		this.id = id;
 	}
 
-	public String getPropietario() {
-		return propietario;
+	public String getProprietario() {
+		return proprietario;
 	}
-	public void setPropietario(String propietario) {
-		this.propietario = propietario;
+	public void setProprietario(String proprietario) {
+		this.proprietario = proprietario;
 	}
 	public int getAnno_creazione() {
 		return anno_creazione;

@@ -7,18 +7,18 @@ import com.spring.rubrica.entity.Contatto;
 
 public class RubricaDTO {
 	private int id;
-	private String propietario;
+	private String proprietario;
 	private int anno_creazione;
 	private Map<Integer, Contatto> contatti = new HashMap<>();
-
+	
 	public RubricaDTO() {
 		super();
 	}
 
-	public RubricaDTO(int id,String propietario, int anno_iscrizione) {
+	public RubricaDTO(int id,String proprietario, int anno_iscrizione) {
 		super();
 		this.id = id;
-		this.propietario = propietario;
+		this.proprietario = proprietario;
 		this.anno_creazione = anno_iscrizione;
 	}
 	public Map<Integer, Contatto> getContatti() {
@@ -37,12 +37,12 @@ public class RubricaDTO {
 		this.id = id;
 	}
 
-	public String getPropietario() {
-		return propietario;
+	public String getProprietario() {
+		return proprietario;
 	}
 
-	public void setPropietario(String propietario) {
-		this.propietario = propietario;
+	public void setProprietario(String proprietario) {
+		this.proprietario = proprietario;
 	}
 
 	public int getAnno_creazione() {

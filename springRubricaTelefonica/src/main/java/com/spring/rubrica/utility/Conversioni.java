@@ -9,11 +9,11 @@ public class Conversioni {
 	
 	//Conversioni per Rubrica
 	public static Rubrica daRubricaDTOARubrica(RubricaDTO dto) {
-		return new Rubrica(dto.getId(), dto.getProprietario(), dto.getAnno_creazione());
+		return new Rubrica(dto.getId(), dto.getProprietario(), dto.getAnno_creazione(), dto.getContatti());
 	}
 
 	public static RubricaDTO daRubricaARubricaDTO(Rubrica rubrica) {
-		return new RubricaDTO(rubrica.getId(), rubrica.getProprietario(), rubrica.getAnno_creazione());
+		return new RubricaDTO(rubrica.getId(), rubrica.getProprietario(), rubrica.getAnno_creazione() , rubrica.getContatti());
 	}
 
 	

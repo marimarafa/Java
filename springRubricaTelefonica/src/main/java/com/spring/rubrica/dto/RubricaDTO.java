@@ -15,6 +15,15 @@ public class RubricaDTO {
 		super();
 	}
 
+	public RubricaDTO(int id, String proprietario, int anno_creazione, Map<Integer, Contatto> contatti) {
+		super();
+		this.id = id;
+		this.proprietario = proprietario;
+		this.anno_creazione = anno_creazione;
+		this.contatti = contatti;
+	}
+
+
 	public RubricaDTO(int id,String proprietario, int anno_iscrizione) {
 		super();
 		this.id = id;

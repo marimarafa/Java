@@ -9,13 +9,13 @@ public class RubricaDTO {
 	private int id;
 	private String proprietario;
 	private int anno_creazione;
-	private Map<Integer, Contatto> contatti = new HashMap<>();
+	private Map<Integer, ContattoDTO> contatti = new HashMap<>();
 	
 	public RubricaDTO() {
 		super();
 	}
 
-	public RubricaDTO(int id, String proprietario, int anno_creazione, Map<Integer, Contatto> contatti) {
+	public RubricaDTO(int id, String proprietario, int anno_creazione, Map<Integer, ContattoDTO> contatti) {
 		super();
 		this.id = id;
 		this.proprietario = proprietario;
@@ -30,11 +30,11 @@ public class RubricaDTO {
 		this.proprietario = proprietario;
 		this.anno_creazione = anno_iscrizione;
 	}
-	public Map<Integer, Contatto> getContatti() {
+	public Map<Integer, ContattoDTO> getContatti() {
 		return contatti;
 	}
 
-	public void setContatti(Map<Integer, Contatto> contatti) {
+	public void setContatti(Map<Integer, ContattoDTO> contatti) {
 		this.contatti = contatti;
 	}
 

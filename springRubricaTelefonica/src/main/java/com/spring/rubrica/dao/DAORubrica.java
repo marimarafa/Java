@@ -8,6 +8,6 @@ public interface DAORubrica {
 	public boolean insert(Rubrica rubrica);
 	public List<Rubrica> selectAll();
 	public Rubrica selectById(Integer idRubrica);
-	public boolean delete(Integer idRubrica);
+	public void delete(Integer idRubrica);
 
 }

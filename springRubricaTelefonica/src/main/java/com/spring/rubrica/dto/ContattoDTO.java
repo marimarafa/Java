@@ -7,7 +7,7 @@ public class ContattoDTO {
 	private String nome;
 	private String cognome;
 	private int numero;
-	private String gruppo_appartenenza = "default";
+	private String gruppo_appartenenza;
 	private Date data_nascita;
 	private boolean preferito;
 	

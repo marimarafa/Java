@@ -19,8 +19,6 @@ import com.spring.rubrica.entity.Rubrica;
 @Repository
 public class DAORubricaImpl implements DAORubrica {
 
-	private Map<Integer, Rubrica> mappa = new HashMap<>();
-
 	public Connection connessione() {
 		// PUNTO 1 : Carico i driver in memoria
 		Connection conn = null;
@@ -40,7 +38,7 @@ public class DAORubricaImpl implements DAORubrica {
 
 	public boolean insert(Rubrica rubrica) {
 		Connection conn = connessione();
-		String miaquery = "INSERT INTO rubrica (id,proprietario, anno_creazione) VALUES(?,?,?;)";
+		String miaquery = "INSERT INTO rubrica (id,proprietario, anno_creazione) VALUES(?,?,?)";
 		PreparedStatement prep;
 		try {
 			prep = conn.prepareStatement(miaquery);
@@ -50,7 +48,8 @@ public class DAORubricaImpl implements DAORubrica {
 			// PUNTO 5 : eseguire la QUERY
 			prep.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			return false;
+			
 		}
 		return true;
 	}

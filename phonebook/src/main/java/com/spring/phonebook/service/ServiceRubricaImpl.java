@@ -239,12 +239,7 @@ public class ServiceRubricaImpl implements ServiceRubrica {
 		if (opt.isPresent()) {
 			Rubrica rubrica = opt.get();
 			dimensione = rubrica.getContatti().size();
-		}
-		if (dimensione != 0) {
-			return dimensione;
-		} else {
-			return  -1;
-		}
+		}return dimensione;
 	}
 
 	public ContattoDTO VisualizzaConNumero(int idRubrica, String numero) {

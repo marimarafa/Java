@@ -1,0 +1,10 @@
+package com.spring.impiegati.service;
+
+import com.spring.impiegati.dto.ImpiegatoDTO;
+
+public interface ServiceImpiegato {
+	
+	public boolean assumi(ImpiegatoDTO dto);
+	public ImpiegatoDTO cercaPerMatricola(int matricola);
+
+}

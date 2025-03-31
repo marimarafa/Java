@@ -1,0 +1,37 @@
+package com.spring.ecommerce.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.spring.ecommerce.dto.ErroreDTO;
+import com.spring.ecommerce.dto.VenditoreDTO;
+import com.spring.ecommerce.service.ServiceVenditore;
+
+@RestController
+@RequestMapping(path = "/venditori")
+public class ControllerVenditore {
+	
+	@Autowired
+	private ServiceVenditore service;
+	
+	@PostMapping(consumes = "application/json")
+	public boolean inserisci(@RequestBody VenditoreDTO dto) {
+		return service.inserisci(dto);
+	}
+	
+	
+	
+	@ExceptionHandler
+	public ResponseEntity<ErroreDTO> gestore(RuntimeException exc){
+		ErroreDTO errore = new ErroreDTO(exc.getMessage());
+		ResponseEntity<ErroreDTO> response = new ResponseEntity<ErroreDTO>(errore,HttpStatus.NOT_FOUND);
+		return response;
+	}
+
+}

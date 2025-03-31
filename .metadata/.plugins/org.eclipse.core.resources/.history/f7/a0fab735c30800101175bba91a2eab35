@@ -1,0 +1,16 @@
+package com.example.studente.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Studente {
+	
+	@Id
+	private int matricola;
+	private String nome;
+	private String cognome;
+	private int annoImm;
+	
+
+}

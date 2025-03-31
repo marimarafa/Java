@@ -1,0 +1,31 @@
+package com.spring.impiegati.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.impiegati.dao.DaoImpiegato;
+import com.spring.impiegati.dto.ImpiegatoDTO;
+import com.spring.impiegati.entity.Impiegato;
+
+@Service
+@org.springframework.transaction.annotation.Transactional
+public class ServiceImpiegatoImpl implements ServiceImpiegato {
+	
+	@Autowired
+	private DaoImpiegato dao;
+
+	@Override
+	public boolean assumi(ImpiegatoDTO dto) {
+		Impiegato imp = new Impiegato(imp.getMatricola(), imp.getNome(), imp.getCognome(), imp.getSalario());
+		Optional<Impiegato> opt= dao.findById(dto.getMatricola());
+		if(opt.isPresent())
+			return false;
+		else {
+			dao.save(imp);
+			return true;
+		}
+	}
+
+}

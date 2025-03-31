@@ -1,0 +1,6 @@
+La compagnia aerea:
+"WizzAir"
+Con i seguenti aerei
+{"posti_tot":122,"posti":100,"id":1}
+ E i seguenti voli: 
+{"imbarco":false,"decollo":"12:00","atterraggio":"14:00","aereo":1,"id":1,"partenza":"roma","arrivo":"milano"}

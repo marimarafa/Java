@@ -1,0 +1,19 @@
+package com.example.studente.dao;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.example.studente.entity.Studente;
+
+
+public interface DaoStudente extends JpaRepository<Studente,Integer > {
+	
+	//qui ci sono gia in eredità tutte le funzioni CRUD
+	
+	@Query(nativeQuery = true , value = "select * from studente where anno_imm  > : anno_imm")
+	public List<Studente> getGiovani(int anno_imm); 
+	
+
+}

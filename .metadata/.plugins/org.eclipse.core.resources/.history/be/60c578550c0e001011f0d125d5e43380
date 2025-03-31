@@ -1,0 +1,79 @@
+package com.spring.phonebook.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.phonebook.dao.DaoRubrica;
+import com.spring.phonebook.dto.ContattoDTO;
+import com.spring.phonebook.dto.ContattoNoIdDTO;
+import com.spring.phonebook.dto.RubricaDTO;
+import com.spring.phonebook.entity.Contatto;
+import com.spring.phonebook.entity.Rubrica;
+import com.spring.phonebook.utility.Conversioni;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class ServiceRubricaImpl implements ServiceRubrica {
+
+	@Autowired
+	private DaoRubrica dao;
+
+	@Override
+	public boolean creaRubrica(RubricaDTO dto) {
+		Optional<Rubrica> opt = dao.findById(dto.getIdRubrica());
+		if (opt.isPresent()) {
+			return false;
+		} else {
+			Rubrica rubrica = Conversioni.daRubricaDtoARubrica(dto);
+			dao.save(rubrica);
+			return true;
+		}
+	}
+
+	@Override
+	public RubricaDTO cerca(int id) {
+		Optional<Rubrica> opt = dao.findById(id);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			return Conversioni.daRubricaARubricaDto(rubrica);
+		}
+		return null;
+	}
+
+	@Override
+	public boolean aggiungiContatto(int idRubrica, ContattoDTO contatto) {
+		Optional<Rubrica> opt = dao.findById(idRubrica);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			rubrica.AggiungiContatto(Conversioni.daContattoDtoAContatto(contatto));
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public ContattoDTO modifica(int idRubrica, int id, ContattoDTO dto) {
+		Optional<Rubrica> opt = dao.findById(idRubrica);
+		ContattoDTO dtoo = new ContattoDTO();
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			Contatto contatto = rubrica.getContatti().get(id);
+			if (contatto != null) {
+				contatto.setNome(dto.getNome());
+				contatto.setCognome(dto.getCognome());
+				contatto.setNumero(dto.getNumero());
+
+				rubrica.getContatti().add(contatto);
+				dtoo = Conversioni.daContattoAContattoDto(contatto);
+			} else {
+				return null;
+			}
+		}
+		return dtoo;
+	}
+
+}

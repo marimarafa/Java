@@ -1,0 +1,76 @@
+package com.spring.impiegati.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.impiegati.dao.DaoImpiegato;
+import com.spring.impiegati.dto.ImpiegatoDTO;
+import com.spring.impiegati.entity.Impiegato;
+import com.spring.impiegati.utility.Conversioni;
+
+@Service
+@org.springframework.transaction.annotation.Transactional
+public class ServiceImpiegatoImpl implements ServiceImpiegato {
+	
+	@Autowired
+	private DaoImpiegato dao;
+
+	@Override
+	public boolean assumi(ImpiegatoDTO dto) {
+		Optional<Impiegato> opt= dao.findById(dto.getMatricola());
+		if(opt.isPresent())
+			return false;
+		else {
+			Impiegato imp = Conversioni.daImpiegatoDtoAImpiegato(dto);
+			dao.save(imp);
+			return true;
+		}
+	}
+
+	@Override
+	public ImpiegatoDTO cercaPerMatricola(int matricola) {
+		Optional<Impiegato> opt= dao.findById(matricola);
+		if(opt.isPresent()) {
+			Impiegato imp = opt.get();
+			return Conversioni.daImpiegatoAImpiegatoDto(imp);
+		}
+		return null;
+	}
+
+	@Override
+	public List<ImpiegatoDTO> visualizzaTutti() {
+		ArrayList<ImpiegatoDTO> impiegatiDto = new ArrayList<>();
+		List<Impiegato> impiegati = dao.findAll();
+		for(Impiegato imp : impiegati ) {
+			impiegatiDto.add(Conversioni.daImpiegatoAImpiegatoDto(imp));
+		}
+		 return impiegatiDto;
+	}
+
+	@Override
+	public boolean cancella(int matricola) {
+		Optional<Impiegato> opt= dao.findById(matricola);
+		if (opt.isPresent()) {
+			dao.deleteById(matricola);
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public ImpiegatoDTO modificaSalario(int matricola, int salario) {
+		Impiegato imp = dao.modificaSalario(matricola, salario);
+		return Conversioni.daImpiegatoAImpiegatoDto(imp) ;
+	}
+	
+	
+	
+	
+	
+
+}

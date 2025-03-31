@@ -1,0 +1,12 @@
+package com.example.studente.service;
+
+public interface StudenteService {
+		
+		public boolean immatricola(StudenteDTO dto);
+		public StudenteDTO cerca(Integer matricola);
+		public boolean cancella(Integer matricola);
+		
+
+	}
+
+}

@@ -1,0 +1,362 @@
+package com.spring.phonebook.service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.phonebook.dao.DaoRubrica;
+import com.spring.phonebook.dto.ContattoDTO;
+import com.spring.phonebook.dto.ContattoNoIdDTO;
+import com.spring.phonebook.dto.NumeroContattiDiRubricaDTO;
+import com.spring.phonebook.dto.RubricaDTO;
+import com.spring.phonebook.dto.RubricaListaProprietariDTO;
+import com.spring.phonebook.dto.RubricaPropietario_AnnoCreazioneDTO;
+import com.spring.phonebook.entity.Contatto;
+import com.spring.phonebook.entity.Rubrica;
+import com.spring.phonebook.utility.Conversioni;
+import com.spring.rubrica.dto.ContattoNomeCognomeDTO;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class ServiceRubricaImpl implements ServiceRubrica {
+
+	@Autowired
+	private DaoRubrica dao;
+
+//	_____________________________________________________ service rubrica________________________________________________________________________________________________
+
+	@Override
+	public boolean creaRubrica(RubricaDTO dto) {
+		Optional<Rubrica> opt = dao.findById(dto.getIdRubrica());
+		if (opt.isPresent()) {
+			return false;
+		} else {
+			Rubrica rubrica = Conversioni.daRubricaDtoARubrica(dto);
+			dao.save(rubrica);
+			return true;
+		}
+	}
+
+	@Override
+	public RubricaDTO cerca(int id) {
+		Optional<Rubrica> opt = dao.findById(id);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			return Conversioni.daRubricaARubricaDto(rubrica);
+		}
+		return null;
+	}
+
+	@Override
+	public List<RubricaDTO> visualizzaRubriche() {
+		List<Rubrica> rubriche = dao.findAll();
+		List<RubricaDTO> rubricheDTO = new ArrayList<>();
+		for (Rubrica rubrica : rubriche) {
+			rubricheDTO.add(Conversioni.daRubricaARubricaDto(rubrica));
+		}
+		return rubricheDTO;
+	}
+
+	@Override
+	public boolean cancellaRubrica(int id) {
+		Optional<Rubrica> opt = dao.findById(id);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			dao.delete(rubrica);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public RubricaPropietario_AnnoCreazioneDTO visualizzaRubrica(int id) {
+		Optional<Rubrica> opt = dao.findById(id);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			RubricaDTO dto = Conversioni.daRubricaARubricaDto(rubrica);
+			return new RubricaPropietario_AnnoCreazioneDTO(dto.getProprietario(), dto.getAnnoCreazione());
+		} else {
+			return null;
+		}
+	}
+
+	public RubricaDTO ModificaProprietario(int id, String nuovoProprietario) {
+		Rubrica rubrica = null;
+		Optional<Rubrica> opt = dao.findById(id);
+		if (opt.isPresent()) {
+			rubrica = opt.get();
+			rubrica.setProprietario(nuovoProprietario);
+		}
+		return Conversioni.daRubricaARubricaDto(rubrica);
+	}
+
+	public RubricaDTO ModificaAnnoCreazione(int id, int anno) {
+		Rubrica rubrica = null;
+		Optional<Rubrica> opt = dao.findById(id);
+		if (opt.isPresent()) {
+			rubrica = opt.get();
+			rubrica.setAnnoCreazione(anno);
+		}
+		return Conversioni.daRubricaARubricaDto(rubrica);
+	}
+
+	public RubricaListaProprietariDTO VisualizzaProprietari() {
+		List<String> propietariDTO = new ArrayList<String>();
+		List<Rubrica> rubriche = dao.findAll();
+		int numero_totale = 0;
+		for (Rubrica rubrica : rubriche) {
+			RubricaDTO dto = Conversioni.daRubricaARubricaDto(rubrica);
+			propietariDTO.add(dto.getProprietario());
+			numero_totale++;
+		}
+		return new RubricaListaProprietariDTO(propietariDTO, numero_totale);
+	}
+
+	public RubricaPropietario_AnnoCreazioneDTO RubricaPiuVecchia() {
+		List<Rubrica> rubriche = dao.findAll();
+		List<Integer> anni_creazioni = new ArrayList<Integer>();
+
+		for (Rubrica rubrica : rubriche) {
+			anni_creazioni.add(rubrica.getAnnoCreazione());
+			int max = Collections.max(anni_creazioni);
+
+			return new RubricaPropietario_AnnoCreazioneDTO(rubrica.getProprietario(), max);
+		}
+		return null;
+	}
+
+	public List<Integer> ListaAnniCreazione() {
+		List<Integer> annicreazione = new ArrayList<Integer>();
+		List<Rubrica> rubriche = dao.findAll();
+		for (Rubrica rubrica : rubriche) {
+			annicreazione.add(rubrica.getAnnoCreazione());
+		}
+		Collections.sort(annicreazione);
+		return annicreazione;
+	}
+
+	public NumeroContattiDiRubricaDTO NumeroContattiInRubrica(int id) {
+		Optional<Rubrica> opt = dao.findById(id);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			RubricaDTO dto = Conversioni.daRubricaARubricaDto(rubrica);
+			return new NumeroContattiDiRubricaDTO(dto.getProprietario(), dto.getContatti().size());
+		} else {
+			return null;
+		}
+	}
+
+//	_______________________________________________________________________ service contatto __________________________________________________________________________________
+
+	@Override
+	public boolean aggiungiContatto(int idRubrica, ContattoDTO contatto) {
+		Optional<Rubrica> opt = dao.findById(idRubrica);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			rubrica.AggiungiContatto(Conversioni.daContattoDtoAContatto(contatto));
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public ContattoDTO visualizzaContatto(int idRubrica, int id) {
+		ContattoDTO dto = new ContattoDTO();
+		Optional<Rubrica> opt = dao.findById(idRubrica);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			for (Contatto contatto : rubrica.getContatti()) {
+				if (contatto.getIdContatto() == id) {
+					dto = Conversioni.daContattoAContattoDto(contatto);
+				} else {
+					return null;
+				}
+			}
+		}
+		return dto;
+	}
+
+	@Override
+	public ContattoDTO modifica(int idRubrica, int id, ContattoDTO dto) {
+		Optional<Rubrica> opt = dao.findById(idRubrica);
+		ContattoDTO dtoo = new ContattoDTO();
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			for (Contatto contatto : rubrica.getContatti()) {
+				if (contatto.getIdContatto() == id) {
+					contatto.setNome(dto.getNome());
+					contatto.setCognome(dto.getCognome());
+					contatto.setNumero(dto.getNumero());
+
+					rubrica.getContatti().add(contatto);
+					dtoo = Conversioni.daContattoAContattoDto(contatto);
+				} else {
+					return null;
+				}
+			}
+		}
+		return dtoo;
+	}
+
+	public ContattoDTO cancella(int idRubrica, int id) {
+		Optional<Rubrica> opt = dao.findById(idRubrica);
+		ContattoDTO dto = new ContattoDTO();
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			for (Contatto contatto : rubrica.getContatti()) {
+				if (contatto.getIdContatto() == id) {
+					rubrica.getContatti().remove(contatto);
+					dto = Conversioni.daContattoAContattoDto(contatto);
+				} else {
+					return null;
+				}
+			}
+		}
+		return dto;
+	}
+
+	public List<ContattoDTO> listaContatti(int idRubrica) {
+		List<ContattoDTO> contattiDto = new ArrayList<>();
+		Optional<Rubrica> opt = dao.findById(idRubrica);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			List<Contatto> contatti = new ArrayList<>(rubrica.getContatti());
+			for (Contatto contatto : contatti) {
+				ContattoDTO dto = Conversioni.daContattoAContattoDto(contatto);
+				contattiDto.add(dto);
+			}
+		}
+		return contattiDto;
+	}
+
+	public Integer NumeroContatti(int idRubrica) {
+		int dimensione = 0;
+		Optional<Rubrica> opt = dao.findById(idRubrica);
+		if (opt.isPresent()) {
+			Rubrica rubrica = opt.get();
+			dimensione = rubrica.getContatti().size();
+		}
+		if (dimensione != 0) {
+			return dimensione;
+		} else {
+			dimensione = 0;
+		}
+
+	}
+
+	public ContattoDTO VisualizzaConNumero(int idRubrica, int numero) {
+		Rubrica rubrica = dao.selectById(idRubrica);
+		ContattoDTO dto = new ContattoDTO();
+		if (rubrica != null) {
+			for (Contatto contatto : rubrica.getContatti().values()) {
+				if (contatto.getNumero() == numero) {
+					dto = Conversioni.daContattoAContattoDTO(contatto);
+				} else {
+					throw new RuntimeException("Numero errato.Contatto non trovato.");
+				}
+			}
+		}
+		return dto;
+	}
+
+	public List<ContattoNomeCognomeDTO> VisualizzaConGruppo(int idRubrica, String gruppo) {
+		Rubrica rubrica = dao.selectById(idRubrica);
+		ArrayList<ContattoNomeCognomeDTO> contatti = new ArrayList<ContattoNomeCognomeDTO>();
+		if (rubrica != null) {
+			for (Contatto contatto : rubrica.getContatti().values()) {
+				if (contatto.getGruppo_appartenenza().equals(gruppo)) {
+					ContattoDTO dto = Conversioni.daContattoAContattoDTO(contatto);
+					contatti.add(new ContattoNomeCognomeDTO(dto.getNome(), dto.getCognome()));
+				}
+			}
+		}
+		if (contatti.size() != 0) {
+			return contatti;
+		} else {
+			throw new RuntimeException("Lista vuota.Contatti non trovati dentro il gruppo di appartenenza.");
+		}
+
+	}
+
+	public Integer NumeroContattiGruppo(int idRubrica, String gruppo) {
+		ArrayList<Contatto> contatti = new ArrayList<Contatto>();
+		Rubrica rubrica = dao.selectById(idRubrica);
+		if (rubrica != null) {
+			for (Contatto contatto : rubrica.getContatti().values()) {
+				if (contatto.getGruppo_appartenenza().equals(gruppo)) {
+					contatti.add(contatto);
+				}
+			}
+		}
+		if (contatti.size() != 0) {
+			return contatti.size();
+		} else {
+			throw new RuntimeException(
+					"Impossibile eliminare i contatti.Contatti non trovati dentro il gruppo di appartenenza.");
+		}
+	}
+
+	public List<ContattoDTO> CancellaGruppoContatti(int idRubrica, String gruppo) {
+		ArrayList<ContattoDTO> contatti = new ArrayList<ContattoDTO>();
+		Rubrica rubrica = dao.selectById(idRubrica);
+		if (rubrica != null) {
+			for (Contatto contatto : rubrica.getContatti().values()) {
+				if (contatto.getGruppo_appartenenza().equals(gruppo)) {
+					ContattoDTO dto = Conversioni.daContattoAContattoDTO(contatto);
+					rubrica.getContatti().remove(contatto.getId(), contatto);
+					contatti.add(dto);
+				}
+			}
+		}
+		if (contatti.size() != 0) {
+			return contatti;
+		} else {
+			throw new RuntimeException(
+					"Impossibile eliminare i contatti.Contatti non trovati dentro il gruppo di appartenenza.");
+		}
+
+	}
+
+	public ContattoDTO modificaStatoPreferito(int idRubrica, int id) {
+		Rubrica rubrica = dao.selectById(idRubrica);
+		ContattoDTO dto = new ContattoDTO();
+		if (rubrica != null) {
+			Contatto contatto = rubrica.getContatti().get(id);
+			if (contatto != null) {
+				contatto.setPreferito(true);
+				dto = Conversioni.daContattoAContattoDTO(contatto);
+			} else {
+				throw new RuntimeException(
+						"Impossibile modificare lo stato preferito del contatto.Contatto non trovato");
+			}
+		}
+		return dto;
+
+	}
+
+	public List<ContattoDTO> ContattiPreferiti(int idRubrica) {
+		ArrayList<ContattoDTO> preferiti = new ArrayList<ContattoDTO>();
+		Rubrica rubrica = dao.selectById(idRubrica);
+		if (rubrica != null) {
+			for (Contatto contatto : rubrica.getContatti().values()) {
+				ContattoDTO dto = Conversioni.daContattoAContattoDTO(contatto);
+				if (dto.isPreferito() == true) {
+					preferiti.add(dto);
+				}
+			}
+		}
+		if (preferiti.size() != 0) {
+			return preferiti;
+		} else {
+			throw new RuntimeException("Lista di contatti preferiti vuota.");
+		}
+
+	}
+
+}

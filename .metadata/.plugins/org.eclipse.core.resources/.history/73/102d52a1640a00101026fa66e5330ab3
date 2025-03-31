@@ -1,0 +1,5 @@
+package com.spring.phonebook.dao;
+
+public interface DaoRubrica {
+
+}

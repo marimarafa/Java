@@ -1,0 +1,30 @@
+package com.spring.impiegati.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.spring.impiegati.dto.ImpiegatoDTO;
+import com.spring.impiegati.service.ServiceImpiegato;
+
+@RestController
+@RequestMapping(path="/impiegati")
+public class ControllerImpiegato {
+	
+	@Autowired
+	private ServiceImpiegato service;
+	
+	@PostMapping(consumes = "application/json")
+	public boolean assumi(@RequestBody ImpiegatoDTO dto) {
+		return service.assumi(dto);
+	}
+	
+	@GetMapping(path = "/{matricola}" , produces = "application/json")
+	public ImpiegatoDTO cercaPerMatricola(int matricola) {
+		return service.cercaPerMatricola(matricola);
+	}
+
+}

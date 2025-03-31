@@ -1,0 +1,12 @@
+package com.spring.phonebook.service;
+
+import com.spring.phonebook.dto.ContattoDTO;
+import com.spring.phonebook.dto.RubricaDTO;
+
+public interface ServiceRubrica {
+	
+	public boolean creaRubrica(RubricaDTO dto);
+	public RubricaDTO cercaPerID(int id);
+	public boolean aggiungiContatto(int idRubrica, ContattoDTO contatto);
+
+}

@@ -1,0 +1,5 @@
+package com.spring.phonebook.dto;
+
+public class RubricaPropietario_AnnoCreazioneDTO {
+
+}

@@ -1,0 +1,18 @@
+package com.spring.impiegati.service;
+
+import java.util.List;
+
+import com.spring.impiegati.dto.ImpiegatoDTO;
+import com.spring.impiegati.dto.ImpiegatoNomeCognomeDTO;
+
+public interface ServiceImpiegato {
+	
+	public boolean assumi(ImpiegatoDTO dto);
+	public ImpiegatoDTO cercaPerMatricola(int matricola);
+	public List<ImpiegatoDTO> visualizzaTutti();
+	public boolean cancella(int matricola);
+	public ImpiegatoDTO modificaSalario(int matricola, int salario);
+	public ImpiegatoNomeCognomeDTO cancellaImpiegato(int matricola);
+	public List<ImpiegatoNomeCognomeDTO> NomiCognomiImpiegati();
+	public List<ImpiegatoDTO> salarioMaggiore(int salario);
+}

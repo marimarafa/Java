@@ -1,0 +1,106 @@
+package com.spring.ecommerce.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.ecommerce.dao.DAOVenditore;
+import com.spring.ecommerce.dto.ProdottoDTO;
+import com.spring.ecommerce.dto.VenditoreDTO;
+import com.spring.ecommerce.entity.Prodotto;
+import com.spring.ecommerce.entity.Venditore;
+import com.spring.ecommerce.utility.Conversioni;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class ServiceVenditoreImpl implements ServiceVenditore {
+
+	@Autowired
+	DAOVenditore dao;
+
+	@Override
+	public boolean inserisci(VenditoreDTO dto) {
+		Optional<Venditore> opt = dao.findById(dto.getId());
+		if (opt.isPresent()) {
+			throw new RuntimeException("Venditore già esistente.ID non valido");
+		} else {
+			Venditore venditore = Conversioni.daVenditoreDTOAVenditore(dto);
+			dao.save(venditore);
+			return true;
+		}
+	}
+
+	@Override
+	public VenditoreDTO cerca(int idVenditore) {
+		Optional<Venditore> opt = dao.findById(idVenditore);
+		if (opt.isPresent()) {
+			Venditore venditore = opt.get();
+			return Conversioni.daVenditoreAVenditoreDTO(venditore);
+		}
+		throw new RuntimeException("Venditore non trovato.ID non valido");
+	}
+
+	@Override
+	public List<VenditoreDTO> visualizzaTutti() {
+		List<Venditore> venditori = dao.findAll();
+		List<VenditoreDTO> venditoriDto = new ArrayList<>();
+		for (Venditore vend : venditori) {
+			venditoriDto.add(Conversioni.daVenditoreAVenditoreDTO(vend));
+		}
+		return venditoriDto;
+	}
+
+	@Override
+	public VenditoreDTO modificaPassword(int idvenditore, String newPass) {
+		Optional<Venditore> opt = dao.findById(idvenditore);
+		if (opt.isPresent()) {
+			Venditore venditore = opt.get();
+			venditore.setPassword(newPass);
+			return Conversioni.daVenditoreAVenditoreDTO(venditore);
+		} else {
+			throw new RuntimeException("Password non modificata.Venditore non trovato");
+		}
+	}
+
+	@Override
+	public boolean aggiungiProdotto(int idVenditore, ProdottoDTO dto) {
+	    Optional<Venditore> opt = dao.findById(idVenditore);
+	    if (opt.isPresent()) {
+	        Venditore venditore = opt.get();
+	        for (Prodotto pro : venditore.getProdotti()) {
+	            if (pro.getId() == dto.getId()) {
+	                throw new RuntimeException("Prodotto già esistente, ID non valido.");
+	            }
+	        }
+	        Prodotto prodotto = Conversioni.daProdottoDTOAProdotto(dto);
+	        venditore.getProdotti().add(prodotto);
+	        return true;
+	    } else {
+	        throw new RuntimeException("Impossibile aggiungere il prodotto, Venditore non trovato.");
+	    }
+	}
+
+	@Override
+	public ProdottoDTO modificaQuantita(int idVenditore,int idProdotto, int quantita) {
+		Optional<Venditore> opt = dao.findById(idVenditore);
+		if (opt.isPresent()) {
+	        Venditore venditore = opt.get();
+	        Prodotto prodotto = venditore.getProdotti().get(idProdotto);
+	        System.out.println(prodotto);
+	        if(prodotto != null) {
+	        	prodotto.setQuantita(quantita);
+	        } else {
+	        	throw new RuntimeException("Prodotto non trovato,ID non valido.");
+	        }
+	        return Conversioni.daProdottoAProdottoDTO(prodotto);
+		}else {
+			 throw new RuntimeException("Impossibile modificare la quantita del prodotto, Venditore non trovato.");
+		}
+	}
+
+}

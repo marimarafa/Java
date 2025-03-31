@@ -1,0 +1,20 @@
+package com.spring.ecommerce.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.spring.ecommerce.dto.ErroreDTO;
+
+
+public class ControllerVenditore {
+	
+	
+	@ExceptionHandler
+	public ResponseEntity<ErroreDTO> gestore(RuntimeException exc){
+		ErroreDTO errore = new ErroreDTO(exc.getMessage());
+		ResponseEntity<ErroreDTO> response = new ResponseEntity<ErroreDTO>(errore,HttpStatus.NOT_FOUND);
+		return response;
+	}
+
+}

@@ -1,0 +1,34 @@
+package com.spring.ecommerce.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.ecommerce.dao.DAOVenditore;
+import com.spring.ecommerce.dto.VenditoreDTO;
+import com.spring.ecommerce.entity.Venditore;
+import com.spring.ecommerce.utility.Conversioni;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class ServiceVenditoreImpl implements ServiceVenditore{
+	
+	@Autowired
+	DAOVenditore dao;
+
+	@Override
+	public boolean inserisci(VenditoreDTO dto) {
+		Optional<Venditore> opt = dao.findById(dto.getId());
+		if(opt.isPresent()) {
+			return false;
+		} else {
+			Venditore vend = Conversioni.daVenditoreDTOAVenditore(dto);
+			dao.save(rubrica);
+			return true;
+		}
+	}
+
+}

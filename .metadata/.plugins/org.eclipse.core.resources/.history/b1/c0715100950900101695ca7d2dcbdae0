@@ -1,0 +1,13 @@
+package com.spring.impiegati.service;
+
+import com.spring.impiegati.dto.ImpiegatoDTO;
+
+public class ServiceImpiegatoImpl implements ServiceImpiegato {
+
+	@Override
+	public boolean assumi(ImpiegatoDTO dto) {
+		
+		return false;
+	}
+
+}

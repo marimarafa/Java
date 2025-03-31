@@ -1,0 +1,5 @@
+package com.spring.impiegati.dao;
+
+public interface DaoImpiegato {
+
+}

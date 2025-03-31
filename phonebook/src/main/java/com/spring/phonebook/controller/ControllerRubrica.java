@@ -1,0 +1,102 @@
+package com.spring.phonebook.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.spring.phonebook.dto.ContattoDTO;
+import com.spring.phonebook.dto.NumeroContattiDiRubricaDTO;
+import com.spring.phonebook.dto.RubricaDTO;
+import com.spring.phonebook.dto.RubricaListaProprietariDTO;
+import com.spring.phonebook.dto.RubricaPropietario_AnnoCreazioneDTO;
+import com.spring.phonebook.service.ServiceRubrica;
+
+@RestController
+@RequestMapping(path = "/rubriche")
+public class ControllerRubrica {
+    
+    @Autowired
+    private ServiceRubrica service;
+    
+    // _________________________________________ Controller Rubrica ___________________________________________
+    
+    @PostMapping(consumes = "application/json")
+    public boolean crea(@RequestBody RubricaDTO dto) {
+        return service.creaRubrica(dto);
+    }
+    
+    @GetMapping(path = "/{id}", produces = "application/json")
+    public RubricaDTO cerca(@PathVariable int id) {
+        return service.cerca(id);
+    }
+    
+    @GetMapping(produces = "application/json")
+    public List<RubricaDTO> visualizza() {
+        return service.visualizzaRubriche();
+    }
+    
+    @DeleteMapping(path = "{id}", produces = "application/json")
+    public boolean cancellaRubrica(@PathVariable int id) {
+        return service.cancellaRubrica(id);
+    }
+    
+    @GetMapping(path = "/proprietari", produces = "application/json")
+    public RubricaListaProprietariDTO visualizzaProprietari() {
+        return service.VisualizzaProprietari();
+    }
+    
+    @GetMapping(path = "/piuVecchia", produces = "application/json")
+    public RubricaPropietario_AnnoCreazioneDTO rubricaPiuVecchia() {
+        return service.RubricaPiuVecchia();
+    }
+    
+    @GetMapping(path = "/anniCreazione", produces = "application/json")
+    public List<Integer> listaAnniCreazione() {
+        return service.ListaAnniCreazione();
+    }
+    
+    @GetMapping(path = "/{id}/numeroContatti", produces = "application/json")
+    public NumeroContattiDiRubricaDTO numeroContatti(@PathVariable int id) {
+        return service.NumeroContattiInRubrica(id);
+    }
+    
+    // ________________________________________ Controller Contatto ___________________________________________
+    
+    @PostMapping(path = "{idRubrica}/contatti", consumes = "application/json")
+    public boolean aggiungiContatto(@PathVariable int idRubrica, @RequestBody ContattoDTO dto) {
+        return service.aggiungiContatto(idRubrica, dto);
+    }
+    
+    @GetMapping(path = "{idRubrica}/contatti/{idContatto}", produces = "application/json")
+    public ContattoDTO visualizzaContatto(@PathVariable int idRubrica, @PathVariable int idContatto) {
+        return service.visualizzaContatto(idRubrica, idContatto);
+    }
+    
+    @PutMapping(path = "{idRubrica}/contatti/{idContatto}", consumes = "application/json", produces = "application/json")
+    public ContattoDTO modificaContatto(@PathVariable int idRubrica, @PathVariable int idContatto, @RequestBody ContattoDTO dto) {
+        return service.modifica(idRubrica, idContatto, dto);
+    }
+    
+    @DeleteMapping(path = "{idRubrica}/contatti/{idContatto}", produces = "application/json")
+    public ContattoDTO cancellaContatto(@PathVariable int idRubrica, @PathVariable int idContatto) {
+        return service.cancella(idRubrica, idContatto);
+    }
+    
+    @GetMapping(path = "{idRubrica}/contatti", produces = "application/json")
+    public List<ContattoDTO> listaContatti(@PathVariable int idRubrica) {
+        return service.listaContatti(idRubrica);
+    }
+    
+    @GetMapping(path = "{idRubrica}/contatti/numero/{numero}", produces = "application/json")
+    public ContattoDTO visualizzaConNumero(@PathVariable int idRubrica, @PathVariable String numero) {
+        return service.VisualizzaConNumero(idRubrica, numero);
+    }
+}

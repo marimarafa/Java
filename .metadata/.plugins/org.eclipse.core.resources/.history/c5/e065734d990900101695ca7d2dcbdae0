@@ -1,0 +1,16 @@
+package com.spring.impiegati.dao;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.spring.impiegati.dto.ImpiegatoDTO;
+import com.spring.impiegati.entity.Impiegato;
+
+public interface DaoImpiegato extends JpaRepository<Impiegato, Integer> {
+	
+	@Query(nativeQuery = true , value = "UPDATE impiegato SET salario = :salario	WHERE matricola = :matricola;")
+	public ImpiegatoDTO modificaSalario(int matricola, int salario);
+
+}

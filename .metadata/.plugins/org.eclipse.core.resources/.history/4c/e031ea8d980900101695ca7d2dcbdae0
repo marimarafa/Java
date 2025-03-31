@@ -1,0 +1,38 @@
+package com.spring.impiegati.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.spring.impiegati.dto.ImpiegatoDTO;
+import com.spring.impiegati.service.ServiceImpiegato;
+
+@RestController
+@RequestMapping(path="/impiegati")
+public class ControllerImpiegato {
+	
+	@Autowired
+	private ServiceImpiegato service;
+	
+	@PostMapping(consumes = "application/json")
+	public boolean assumi(@RequestBody ImpiegatoDTO dto) {
+		return service.assumi(dto);
+	}
+	
+	@GetMapping(path = "/{matricola}" , produces = "application/json")
+	public ImpiegatoDTO cercaPerMatricola(@PathVariable  int matricola) {
+		return service.cercaPerMatricola(matricola);
+	}
+	
+	@GetMapping(produces = "application/json")
+	public List<ImpiegatoDTO> visualizzaTutti(){
+		return service.visualizzaTutti();
+	}
+
+}

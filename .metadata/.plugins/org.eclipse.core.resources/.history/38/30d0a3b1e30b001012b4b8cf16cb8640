@@ -1,0 +1,50 @@
+package com.spring.ecommerce.utility;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.spring.ecommerce.dto.ProdottoDTO;
+import com.spring.ecommerce.dto.VenditoreDTO;
+import com.spring.ecommerce.entity.Prodotto;
+import com.spring.ecommerce.entity.Venditore;
+
+public class Conversioni {
+	
+	public static Prodotto daProdottoDTOAProdotto(ProdottoDTO dto) {
+        return new Prodotto(dto.getId(), dto.getDescrizione(), dto.getQuantita(), dto.getPrezzo(), dto.getSconto(), dto.getCategoria());
+    }
+
+    public static ProdottoDTO daProdottoAProdottoDTO(Prodotto pro) {
+         return new ProdottoDTO(pro.getId(), pro.getDescrizione(), pro.getQuantita(), pro.getPrezzo(), pro.getSconto(), pro.getCategoria());
+    }
+
+    public static Venditore daVenditoreDTOAVenditore(VenditoreDTO dto) {
+        Venditore venditore = new Venditore(dto.getId(), dto.getNome(), dto.getCognome(), dto.getUsername(), dto.getPassword(), dto.getVia(), dto.getCitta()) ;
+
+        List<ProdottoDTO> prodottiDto = dto.getProdotti();
+        List<Prodotto> prodotti = new ArrayList<>();
+        for(ProdottoDTO proD : prodottiDto) {
+        	prodotti.add(Conversioni.daProdottoDTOAProdotto(proD));
+        }
+        venditore.setProdotti(prodotti);
+        return venditore;
+    }
+
+    public static RubricaDTO daRubricaARubricaDto(Rubrica rubrica) {
+        RubricaDTO rubricaD = new RubricaDTO(rubrica.getIdRubrica(), rubrica.getProprietario(), rubrica.getAnnoCreazione());
+
+        // converto la lista
+        List<Contatto> lista = rubrica.getContatti();
+
+        List<ContattoDTO> listaD = lista.stream()
+                .map(contatto -> Conversioni.daContattoAContattoDto(contatto))
+                .collect(Collectors.toList());
+
+        rubricaD.setContatti(listaD);
+        return rubricaD;
+
+    }
+	
+
+}

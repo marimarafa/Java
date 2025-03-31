@@ -1,0 +1,49 @@
+package com.spring.phonebook.dto;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.spring.phonebook.entity.Contatto;
+
+public class RubricaPropietario_AnnoCreazioneDTO {
+		private String proprietario;
+		private int anno_creazione;
+		private Map<Integer, Contatto> contatti = new HashMap<>();
+
+		public  RubricaPropietario_AnnoCreazioneDTO() {
+			super();
+		}
+
+		public RubricaPropietario_AnnoCreazioneDTO(String proprietario, int anno_iscrizione) {
+			super();
+			this.proprietario = proprietario;
+			this.anno_creazione = anno_iscrizione;
+		}
+
+		public Map<Integer, Contatto> getContatti() {
+			return contatti;
+		}
+
+		public void setContatti(Map<Integer, Contatto> contatti) {
+			this.contatti = contatti;
+		}
+
+		public String getProprietario() {
+			return proprietario;
+		}
+
+		public void setProprietario(String proprietario) {
+			this.proprietario = proprietario;
+		}
+
+		public int getAnno_creazione() {
+			return anno_creazione;
+		}
+
+		public void setAnno_creazione(int anno_iscrizione) {
+			this.anno_creazione = anno_iscrizione;
+		}
+
+
+	}
+

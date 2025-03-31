@@ -1,0 +1,9 @@
+package com.spring.ecommerce.service;
+
+import com.spring.ecommerce.dto.VenditoreDTO;
+
+public interface ServiceVenditore {
+	
+	public boolean inserisci(VenditoreDTO dto);
+
+}

@@ -1,0 +1,5 @@
+package com.example.studente.dto;
+
+public class ImpiegatoNomeCognomeDTO {
+
+}

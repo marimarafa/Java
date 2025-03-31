@@ -1,0 +1,7 @@
+package com.spring.utente.dto;
+
+public class ErroreDTO {
+	private String message;
+	
+
+}

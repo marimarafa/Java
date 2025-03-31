@@ -1,0 +1,21 @@
+package com.spring.phonebook.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Rubrica {
+	
+	@Id
+	private int idRubrica;
+	
+	private String proprietario;
+	private int annoCreazione;
+	
+	List<Contatto> contatti = new ArrayList<>();
+	
+
+}

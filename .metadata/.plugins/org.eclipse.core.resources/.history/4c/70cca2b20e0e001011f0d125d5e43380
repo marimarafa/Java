@@ -1,0 +1,54 @@
+package com.spring.phonebook.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.spring.phonebook.dto.ContattoDTO;
+import com.spring.phonebook.dto.RubricaDTO;
+import com.spring.phonebook.service.ServiceRubrica;
+
+@RestController
+@RequestMapping(path = "/rubriche")
+public class ControllerRubrica {
+	
+	@Autowired
+	private ServiceRubrica service;
+	
+	@PostMapping(consumes = "application/json")
+	public boolean crea(@RequestBody RubricaDTO dto) {
+		return service.creaRubrica(dto);
+	}
+	
+	@GetMapping(path = "/{id}" ,produces =  "application/json")
+	public RubricaDTO cerca(@PathVariable int id) {
+		return service.cerca(id);
+	}
+	
+	@PostMapping(path = "{idRubrica}/contatti",consumes = "application/json" )
+	public boolean aggiungiContatto(@PathVariable int idRubrica ,@RequestBody ContattoDTO dto) {
+		return service.aggiungiContatto(idRubrica, dto);
+	}
+	
+	@GetMapping(produces =  "application/json")
+	public List<RubricaDTO> visualizza(){
+		return service.visualizzaRubriche();
+	}
+	
+	@DeleteMapping(path = "{id}" , produces =  "application/json" )
+	public boolean cancellaRubrica(@PathVariable int id) {
+		return service.cancellaRubrica(id);
+	}
+	
+//	@PutMapping(path = "{idRubrica}/contatti/{idContatto}" , produces =  "application/json")
+//	public ContattoNoIdDTO modificaContatto(int idRubrica, int idContatto , ContattoDTO dto) {
+//		return service.modifica(idRubrica, idContatto, dto);
+//	}
+}

@@ -1,0 +1,13 @@
+package com.example.studente.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.studente.entity.Studente;
+
+
+public interface DaoStudente extends JpaRepository<Studente,Integer > {
+	
+	//qui ci sono gia in eredità tutte le funzioni CRUD
+	
+
+}

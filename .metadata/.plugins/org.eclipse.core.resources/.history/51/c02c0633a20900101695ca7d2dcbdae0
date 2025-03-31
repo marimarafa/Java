@@ -1,0 +1,19 @@
+package com.spring.impiegati.dao;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.spring.impiegati.entity.Impiegato;
+
+public interface DaoImpiegato extends JpaRepository<Impiegato, Integer> {
+	
+	@Query(nativeQuery = true , value = "select * from impiegato where salario > :salario;")
+	public List<Impiegato>  SalarioMaggiore(int salario);
+	
+	@Query(nativeQuery = true , value = "select * from impiegato order by cognome;")
+	public List<Impiegato>  impiegatiOrdinatiPerCognome();
+	
+
+}

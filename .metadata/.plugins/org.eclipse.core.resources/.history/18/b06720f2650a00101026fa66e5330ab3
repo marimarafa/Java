@@ -1,0 +1,32 @@
+package com.spring.phonebook.service;
+
+import org.springframework.stereotype.Service;
+
+import com.spring.phonebook.dto.ContattoDTO;
+import com.spring.phonebook.dto.RubricaDTO;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class ServiceRubricaImpl implements ServiceRubrica {
+
+	@Override
+	public boolean creaRubrica(RubricaDTO dto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public RubricaDTO cerca(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean aggiungiContatto(int idRubrica, ContattoDTO contatto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

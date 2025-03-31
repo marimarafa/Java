@@ -1,0 +1,5 @@
+package com.spring.ecommerce.entity;
+
+public class Venditore {
+
+}

@@ -1,0 +1,77 @@
+package com.example.studente.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.studente.dao.DaoStudente;
+import com.example.studente.dto.StudenteDTO;
+import com.example.studente.entity.Studente;
+
+@Service
+@org.springframework.transaction.annotation.Transactional
+public class StudenteServiceImpl implements StudenteService {
+	
+	@Autowired
+	private DaoStudente dao;
+	
+	@Override
+	public boolean immatricola(StudenteDTO dto) {
+		Studente st = new Studente(dto.getMatricola(), dto.getNome(), dto.getCognome(), dto.getAnnoImm());
+		Optional<Studente> opt= dao.findById(dto.getMatricola());
+		if(opt.isPresent())
+			return false;
+		else {
+			dao.save(st);
+			return true;
+		}
+		
+	} 
+	@Override
+	public StudenteDTO cerca(Integer matricola) {
+		Optional<Studente> opt= dao.findById(matricola);
+		if(opt.isPresent()) {
+			Studente st = opt.get();
+			return new StudenteDTO(st.getMatricola(),st.getNome(),st.getCognome(),st.getAnnoImm());
+		}
+		return null;
+
+	}
+
+	@Override
+	public boolean cancella(Integer matricola) {
+		Optional<Studente> opt= dao.findById(matricola);
+		if (opt.isPresent()) {
+			dao.deleteById(matricola);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	@Override
+	public List<StudenteDTO> cercaTutti(){
+		ArrayList<StudenteDTO> studentiDto = new ArrayList<>();
+		List<Studente> studenti = dao.findAll();
+		for(Studente st : studenti) {
+			studentiDto.add(new StudenteDTO(st.getMatricola(),st.getNome(),st.getCognome(),st.getAnnoImm()));
+		}
+		 return studentiDto;
+	}
+	
+	@Override
+	public List<StudenteDTO> getGiovani(int annoImm) {
+		List<Studente> studenti = dao.getGiovani(annoImm);
+		
+		//trasformazione
+		
+		return studenti.stream()
+				.map(studente ->  new StudenteDTO(studente.getMatricola(), studente.getNome(), studente.getCognome(), studente.getAnnoImm()))
+				.collect(Collectors.toList());
+	}
+
+}
